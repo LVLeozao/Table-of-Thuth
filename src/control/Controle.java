@@ -52,11 +52,11 @@ public class Controle implements ActionListener, MouseListener {
 		
 		this.telaInventario.getBtnPausar().addActionListener(this);
 		this.telaPausa.getBtnVoltar().addActionListener(this);
+		this.telaPausa.getBtnSair().addActionListener(this);
 		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("ENTROU");
 		if(e.getSource() == this.tela.getTelaAbertura().getBtnConfig()){
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "2");
 		}
@@ -97,17 +97,18 @@ public class Controle implements ActionListener, MouseListener {
 		else if(e.getSource() == this.telaSelecao.getBtnConfirmar()){
 			
 			if(this.telaSelecao.getSelecionado().equalsIgnoreCase("Rebekah") ||this.telaSelecao.getSelecionado().equalsIgnoreCase("Niklaus")){
-				if(this.telaSelecao.getTfNome().getText() != ""){
+				
+				if(!this.telaSelecao.getTfNome().getText().equals("")){
 					
 					try {
 						if (this.telaSelecao.getNome().equalsIgnoreCase("Rebekah")) {
 
 							this.protagonista = new Protagonista("img/Rebekah.png", 32, 32, 4, 3, 0, 2000, 32, 96, this.tela.getTelaSelecao().getTfNome().getText(), true,
-									"img/Raio.png", 4, 128, 500);
+									"img/Raio.png", 4, 128, 500, "src/img/F.png");
 						}
 						else if (this.telaSelecao.getNome().equalsIgnoreCase("Niklaus")) {
 							this.protagonista = new Protagonista("img/Niklaus.png", 32, 32, 4, 3, 0, 2000, 32, 96, this.tela.getTelaSelecao().getTfNome().getText(), true,
-									"img/Raio.png", 4, 128, 500);
+									"img/Raio.png", 4, 128, 500, "src/img/M.png");
 						}
 
 					} 
@@ -116,9 +117,9 @@ public class Controle implements ActionListener, MouseListener {
 						arg.printStackTrace();
 					}
 					
+					
 					this.controleFases = new ControleFases(tela, this.protagonista);
 					this.controleFases.start();
-					
 					
 				}
 				
@@ -126,15 +127,25 @@ public class Controle implements ActionListener, MouseListener {
 		}
 		
 		else if(e.getSource() == this.tela.getTelaInventario().getBtnPausar()){
-			System.out.println("ENTROU");
+		
+			this.controleFases.getControleFase().desativarThread();
 			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "2");
 		}
 		else if(e.getSource() == this.tela.getTelaPausa().getBtnSair()){
-			//Implementar pausa;
+			this.tela.getPanelInventario().setVisible(false);
+			this.tela.getPanelJogavel().setVisible(false);
+			this.tela.getPanelGeral().setVisible(true);
+			this.controleFases.getControleFase().desativarThread();
+			this.controleFases.getControleFase().stop();
+			this.controleFases.stop();
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
+			this.controleFases = null;
+			System.out.println(this.tela.getPanelJogavel());
+			System.gc();
 		}
 		
 		else if(e.getSource() == this.telaPausa.getBtnVoltar()){
+			this.controleFases.getControleFase().ativarThread();
 			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
 		}
 	}

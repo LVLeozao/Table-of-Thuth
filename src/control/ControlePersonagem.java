@@ -13,7 +13,7 @@ import model.ThreadPoder;
 import model.VerificarColisao;
 
 
-public class ControlePersonagem extends Thread implements KeyListener {
+public class ControlePersonagem implements KeyListener {
 
 	private Protagonista protagonista;
 	private int up, down, left, right, direcao;
@@ -27,7 +27,7 @@ public class ControlePersonagem extends Thread implements KeyListener {
 		this.protagonista = protagonista;
 		this.matzColisao = matzColisao;
 		this.personagens = personagens;
-
+	
 		
 	}
 
@@ -173,7 +173,7 @@ public class ControlePersonagem extends Thread implements KeyListener {
 		}
 		
 		else if(e.getKeyCode() == KeyEvent.VK_S){
-			System.out.println("Ainda não implementado;");
+			this.protagonista.setIntersectBau(true);
 		}
 		
 		

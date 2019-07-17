@@ -51,7 +51,7 @@ public class TelaPausa extends JPanel{
 		add(btnSair);
 		add(lbBg);
 	
-		requestFocus();
+		//requestFocus();
 
 
 	}

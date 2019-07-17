@@ -48,6 +48,7 @@ public class TelaSelecao extends JPanel{
 		btnConfirmar.setContentAreaFilled(false);
 		btnConfirmar.setBorderPainted(false);
 		
+		this.selecionado = "";
 	
 		
 		add(btnVoltar);
@@ -59,9 +60,7 @@ public class TelaSelecao extends JPanel{
 		add(lbBg);
 		
 		
-		
-		
-		setVisible(true);
+
 	}
 
 	

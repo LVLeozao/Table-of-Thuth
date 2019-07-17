@@ -63,7 +63,7 @@ public class TelaAbertura extends JPanel {
 		add(btnExit);
 		add(lbWallpaper);
 		
-		setFocusable(true);
+		//setFocusable(true);
 		
 
 	}

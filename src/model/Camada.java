@@ -35,7 +35,6 @@ public class Camada{
 		this.mapa = new int[mapaQntLinhas][mapaQtnColunas];
 		this.mapa = carregaMatriz(mapa, arquivo);
 		try {
-			System.out.println(tileImg);
 			this.tileSet = ImageIO.read(getClass().getClassLoader().getResource(tileImg));
 		} catch (IOException e) {
 			System.out.println("Erro ao tileSet.\nEncerrando aplicação");

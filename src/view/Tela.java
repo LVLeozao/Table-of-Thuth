@@ -2,6 +2,7 @@ package view;
 
 import java.awt.CardLayout;
 import java.awt.Rectangle;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -13,7 +14,7 @@ import model.Inimigo;
 import model.Personagem;
 import model.Protagonista;
 
-public class Tela extends JFrame{
+public class Tela extends JFrame implements Cloneable{
 	private JPanel panelGeral, panelJogavel, panelInventario;
 	private TelaAnd telaAnd; 
 	private TelaOr telaOr;	
@@ -51,22 +52,23 @@ public class Tela extends JFrame{
 		panelInventario.setVisible(false);
 		panelInventario.setBounds(800, 0, 200, 704);
 		
-		this.telaAnd = new TelaAnd();
+		/*this.telaAnd = new TelaAnd();
 		this.telaOr = new TelaOr();
-		this.telaNot = new TelaNot();
+		this.telaNot = new TelaNot();*/
+		
 		this.telaAbertura = new TelaAbertura();
 		this.telaInformacoes = new TelaInformacoes();
 		this.telaSelecao = new TelaSelecao();
 		this.telaInventario = new TelaInventario();
 		this.telaPausa = new TelaPausa();
 	
-		cardJogavel.addLayoutComponent(telaAnd, "1");
+		/*cardJogavel.addLayoutComponent(telaAnd, "1");
 		cardJogavel.addLayoutComponent(telaOr, "2");
-		cardJogavel.addLayoutComponent(telaNot, "3");
+		cardJogavel.addLayoutComponent(telaNot, "3");*/
 		
-		panelJogavel.add(telaAnd);
+		/*panelJogavel.add(telaAnd);
 		panelJogavel.add(telaOr);
-		panelJogavel.add(telaNot);
+		panelJogavel.add(telaNot);*/
 		
 		
 		cardGeral.addLayoutComponent(this.telaAbertura, "1");
@@ -84,16 +86,21 @@ public class Tela extends JFrame{
 		panelInventario.add(telaPausa);
 	
 		
-		add(panelInventario);
+		
+		
+		
 		add(panelGeral);
-		add(panelJogavel);
+		add(panelInventario);
+		//add(panelJogavel);
 		
 		cardGeral.show(panelGeral, "1");
+		
 		
 		setVisible(true);
 	}
 	
 	
+
 
 	public TelaPausa getTelaPausa() {
 		return telaPausa;
@@ -174,6 +181,27 @@ public class Tela extends JFrame{
 
 	public TelaInformacoes getTelaInformacoes() {
 		return telaInformacoes;
+	}
+
+
+
+
+	public void setTelaAnd(TelaAnd telaAnd) {
+		this.telaAnd = telaAnd;
+	}
+
+
+
+
+	public void setTelaOr(TelaOr telaOr) {
+		this.telaOr = telaOr;
+	}
+
+
+
+
+	public void setTelaNot(TelaNot telaNot) {
+		this.telaNot = telaNot;
 	}
 	
 	

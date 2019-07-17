@@ -10,17 +10,18 @@ public class Protagonista extends Personagem {
 	private String nome;
 	private int pontuacao;
 	private Boolean intersectBau;
+	private String caminhoTumb;
 	
 	public Protagonista(String fileImage, int largura, int altura, int linhas, int colunas, int aparencia, int qntVida,
 			int posX, int posY,String nome, boolean condicaoExistenci, String poderImage,
-			int colunasPoder, int larguraPoder, int dano) throws IOException {
+			int colunasPoder, int larguraPoder, int dano, String caminhoThumb) throws IOException {
 		super(fileImage, largura, altura, linhas, colunas, aparencia, qntVida, posX, posY
 				, condicaoExistenci, poderImage, colunasPoder, larguraPoder, dano);
 		
 		this.nome = nome;
 		this.intersectBau = false;
-		
-		getLifeBar().setBounds(825, 421, 153, 15);
+		this.caminhoTumb = caminhoThumb;
+		getLifeBar().setBounds(25, 421, 153, 15);
 		
 		
 	}
@@ -28,6 +29,14 @@ public class Protagonista extends Personagem {
 	
 
 	
+
+	public String getCaminhoTumb() {
+		return caminhoTumb;
+	}
+
+
+
+
 
 	public Boolean getIntersectBau() {
 		return intersectBau;

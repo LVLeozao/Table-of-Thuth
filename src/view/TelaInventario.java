@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -21,13 +22,14 @@ public class TelaInventario extends JPanel{
 	private String nomePersonagem, camingoImagemBackground, pontuacao;
 	
 	
+	private ImageIcon iiBg, iiThumb;
 	
 	public TelaInventario(){
 	
 		setLayout(null);
 		
-		this.lbBg = new JLabel(new ImageIcon("src/img/BarraLateralOr.png"));
-		lbBg.setBounds(0,0,200,704);
+		this.iiBg = new ImageIcon("src/img/BarraLateralOr.png");
+		this.iiThumb  = new ImageIcon("");
 		
 		this.iiPausar = new ImageIcon("src/img/Pausar.png");
 	
@@ -51,14 +53,18 @@ public class TelaInventario extends JPanel{
 		add(lbNome);
 		add(lbPontuacao);
 		add(btnPausar);
-		add(lbBg);
+	
 		
-		requestFocus();
-		
-
+	
 		
 	}
 	
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(iiBg.getImage(), 0, 0, this);
+		g.drawImage(iiThumb.getImage(), 58, 240, this);
+	}
 	
 	public JLabel getLbPontuacao() {
 		return lbPontuacao;
@@ -69,6 +75,36 @@ public class TelaInventario extends JPanel{
 	public JButton getBtnPausar() {
 		return btnPausar;
 	}
+
+	public String getNomePersonagem() {
+		return nomePersonagem;
+	}
+
+	public void setNomePersonagem(String nomePersonagem) {
+		this.nomePersonagem = nomePersonagem;
+	}
+
+
+	public JLabel getLbNome() {
+		return lbNome;
+	}
+
+
+	public ImageIcon getIiPausar() {
+		return iiPausar;
+	}
+
+
+	public ImageIcon getIiThumb() {
+		return iiThumb;
+	}
+
+
+	public void setIiThumb(ImageIcon iiThumb) {
+		this.iiThumb = iiThumb;
+	}
+	
+	
 	
 	
 }

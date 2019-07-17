@@ -152,10 +152,7 @@ public class ControleInimigo{
 				threadPoder.start();
 			}
 			
-			else{
-				System.out.println("Não executar!");
-			}
-			
+		
 			
 		}
 		
