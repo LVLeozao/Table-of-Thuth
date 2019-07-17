@@ -1,5 +1,6 @@
 package control;
 
+import java.awt.CardLayout;
 import java.io.IOException;
 
 import model.Protagonista;
@@ -15,18 +16,28 @@ public class ControleFases extends Thread {
 	private Tela tela;
 	private static int numeroFase;
 	private ControleFase controleFase;
+	
+	private TelaAnd telaAnd;
+	private TelaOr telaOr;
+	private TelaNot telaNot;
+	
+
 
 	public ControleFases(Tela tela, Protagonista protagonista) {
 		this.tela = tela;
 		this.protagonista = protagonista;
 		this.tela.getPanelGeral().setVisible(false);
+		
 		numeroFase = 1;
 		
+		//Setar vida, setar tempo
 		
 		tela.setTelaAnd(new TelaAnd());
 		tela.setTelaNot(new TelaNot());
 		tela.setTelaOr(new TelaOr());
 		
+		this.tela.setCardJogavel(new CardLayout());
+		this.tela.getPanelJogavel().setLayout(this.tela.getCardJogavel());
 		tela.getCardJogavel().addLayoutComponent(this.tela.getTelaAnd(), "1");
 		tela.getCardJogavel().addLayoutComponent(this.tela.getTelaOr(), "2");
 		tela.getCardJogavel().addLayoutComponent(this.tela.getTelaNot(), "3");
@@ -65,6 +76,8 @@ public class ControleFases extends Thread {
 					this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
 					this.controleFase = new ControleFase(this.tela.getTelaAnd(), this.protagonista, this.tela.getTelaInventario());
 					this.controleFase.start();
+					
+					this.tela.getTelaInventario().getLbNomeFase().setText("AND");
 					numeroFase = 5;
 					break;
 				case 2:

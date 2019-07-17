@@ -35,7 +35,7 @@ public class Tela extends JFrame implements Cloneable{
 		setLayout(null);
 		
 		this.cardGeral = new CardLayout();
-		this.cardJogavel = new CardLayout();
+		//this.cardJogavel = new CardLayout();
 		this.cardInventario = new CardLayout();
 		
 		panelGeral = new JPanel();
@@ -203,6 +203,28 @@ public class Tela extends JFrame implements Cloneable{
 	public void setTelaNot(TelaNot telaNot) {
 		this.telaNot = telaNot;
 	}
+
+
+
+
+	public void setCardJogavel(CardLayout cardJogavel) {
+		this.cardJogavel = cardJogavel;
+	}
+
+
+
+
+	public void setCardInventario(CardLayout cardInventario) {
+		this.cardInventario = cardInventario;
+	}
+
+
+
+
+	public void setTelaInventario(TelaInventario telaInventario) {
+		this.telaInventario = telaInventario;
+	}
+	
 	
 	
 	

@@ -10,7 +10,9 @@ import model.Bau;
 import model.Inimigo;
 import model.Personagem;
 import model.Protagonista;
+import model.Som;
 import model.ThreadInimigo;
+import model.Timer;
 import view.ShowMessage;
 import view.TelaInventario;
 import view.TelaJogo;
@@ -26,12 +28,17 @@ public class ControleFase extends Thread{
 	private ArrayList<Rectangle> matzColisao;
 	private Boolean pausa;
 	private TelaInventario telaInventario;
+	private Som somBau;
+	
+	private Timer timer;
 	
 	public ControleFase(TelaJogo telaJogo, Protagonista protagonista, TelaInventario telaInventario){
 		
 		this.telaInventario = telaInventario;
-		
+	
 		this.telaJogo = telaJogo;
+		
+		this.somBau = new Som("sons/somBau.wav");
 		
 		this.protagonista = protagonista;
 		this.telaJogo.getPersonagens().add(protagonista);
@@ -50,7 +57,7 @@ public class ControleFase extends Thread{
 		this.telaInventario.setIiThumb(new ImageIcon(this.protagonista.getCaminhoTumb()));
 		this.telaInventario.repaint();
 		
-		System.out.println("CLone: "+ this.personagens.size());
+		new Timer(this.telaInventario, this.protagonista).start();
 		
 	}
 	
@@ -91,7 +98,7 @@ public class ControleFase extends Thread{
 		}
 		else{
 			
-			this.protagonista.getLifeBar().setValue(this.protagonista.getQntVida()-200);
+			this.protagonista.getLifeBar().setValue(this.protagonista.getQntVida()-500);
 		}
 		
 		ativarThread();
@@ -100,8 +107,13 @@ public class ControleFase extends Thread{
 	public void ativarBau(){
 		for (Bau bau : baus){
 			if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== false){	
+					somBau.play();
 					bau.mostrarInformação();
 					bau.setWasActivated(true);
+					this.protagonista.setQntBausAbertos(this.protagonista.getQntBausAbertos()+1);
+					this.telaInventario.setQntBaus(this.protagonista.getQntBausAbertos());
+					
+					
 			}
 			else if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== true){
 				ShowMessage.showText("Báu já foi ativado!");
@@ -128,6 +140,7 @@ public class ControleFase extends Thread{
 					}
 					
 					
+					
 				}
 				
 				else{
@@ -146,11 +159,11 @@ public class ControleFase extends Thread{
 				if(telaJogo.getTelaAtiva()){
 					verificarVidaPersonagens();
 					telaJogo.repaint();
-					
+					this.telaInventario.repaint();
 					if(this.protagonista.getIntersectBau()){
 						ativarBau();
 					}
-					
+	
 					
 				}
 						

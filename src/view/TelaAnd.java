@@ -23,6 +23,9 @@ public class TelaAnd extends TelaJogo {
 		getBaus().get(2).setTexto("Simbolo (^)");
 		
 		
+		
+		
+		
 	}
 
 }
