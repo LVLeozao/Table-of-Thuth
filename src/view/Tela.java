@@ -26,6 +26,7 @@ public class Tela extends JFrame implements Cloneable{
 	private TelaInformacoes telaInformacoes;
 	private TelaSelecao telaSelecao;
 	private TelaInventario telaInventario;
+	private TelaResultado telaResultado;
 	
 	
 	public Tela(){

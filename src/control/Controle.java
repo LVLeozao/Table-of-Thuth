@@ -1,5 +1,6 @@
 package control;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +11,11 @@ import java.io.IOException;
 import model.Protagonista;
 import view.Tela;
 import view.TelaAbertura;
+import view.TelaAnd;
 import view.TelaInformacoes;
 import view.TelaInventario;
+import view.TelaNot;
+import view.TelaOr;
 import view.TelaPausa;
 import view.TelaSelecao;
 
@@ -119,7 +123,7 @@ public class Controle implements ActionListener, MouseListener {
 					
 					
 					this.controleFases = new ControleFases(tela, this.protagonista);
-					this.controleFases.start();
+			
 					
 				}
 				
@@ -132,16 +136,71 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "2");
 		}
 		else if(e.getSource() == this.tela.getTelaPausa().getBtnSair()){
+			Runtime rt = Runtime.getRuntime();
+			System.out.println("Memória total da JVM: " + rt.totalMemory());
+			System.out.println("Memória antes da criação dos objetos: " + rt.freeMemory());
+		  
+		  
+			
+			//Parando
 			this.tela.getPanelInventario().setVisible(false);
 			this.tela.getPanelJogavel().setVisible(false);
 			this.tela.getPanelGeral().setVisible(true);
 			this.controleFases.getControleFase().desativarThread();
+			this.controleFases.getControleFase().getTimer().stop();
+			//setar para null
 			this.controleFases.getControleFase().stop();
-			this.controleFases.stop();
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
+		
 			this.controleFases = null;
-			System.out.println(this.tela.getPanelJogavel());
 			System.gc();
+			
+			
+			this.tela.getPanelJogavel().remove(0);
+			this.tela.getPanelJogavel().remove(1);
+		
+			
+			this.tela.setTelaAnd(null);
+			System.gc();
+			this.tela.setTelaNot(null);
+			System.gc();
+			this.tela.setTelaOr(null);
+			System.gc();
+			
+			this.tela.setCardJogavel(null);
+			System.gc();
+			this.tela.getPanelJogavel().setLayout(null);
+			System.gc();
+			this.tela.remove(this.tela.getPanelJogavel());
+		
+			
+			System.gc();
+			System.out.println("Memória depois executar o gc: " + rt.freeMemory());
+			
+			
+			//Setando novamente
+			
+		
+			tela.setTelaAnd(new TelaAnd());
+			tela.setTelaNot(new TelaNot());
+			tela.setTelaOr(new TelaOr());
+			
+			this.tela.setCardJogavel(new CardLayout());
+			this.tela.getPanelJogavel().setLayout(this.tela.getCardJogavel());
+			tela.getCardJogavel().addLayoutComponent(this.tela.getTelaAnd(), "1");
+			tela.getCardJogavel().addLayoutComponent(this.tela.getTelaOr(), "2");
+			tela.getCardJogavel().addLayoutComponent(this.tela.getTelaNot(), "3");
+			
+			
+			this.tela.getPanelJogavel().add(this.tela.getTelaAnd());
+			this.tela.getPanelJogavel().add(this.tela.getTelaOr());
+			this.tela.getPanelJogavel().add(this.tela.getTelaNot());
+			
+			this.tela.add(this.tela.getPanelJogavel());
+			
+			
+			
+			
 		}
 		
 		else if(e.getSource() == this.telaPausa.getBtnVoltar()){

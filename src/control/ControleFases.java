@@ -28,7 +28,6 @@ public class ControleFases extends Thread {
 		this.protagonista = protagonista;
 		this.tela.getPanelGeral().setVisible(false);
 		
-		numeroFase = 1;
 		
 		//Setar vida, setar tempo
 		
@@ -48,8 +47,13 @@ public class ControleFases extends Thread {
 		
 		this.tela.add(this.tela.getPanelJogavel());
 	
-		this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"1");
 		
+		
+		this.tela.getPanelInventario().setVisible(true);
+		this.tela.getPanelJogavel().setVisible(true);
+		
+		this.numeroFase = 1;
+		this.trocarFase();
 		
 	}
 
@@ -62,46 +66,35 @@ public class ControleFases extends Thread {
 		numeroFase+=1;
 	}
 	
-	public void run() {
-		this.tela.getPanelInventario().setVisible(true);
-		this.tela.getPanelJogavel().setVisible(true);
-		
-		while(true){
-			switch (numeroFase) {
-				case 1:
-					transicao("and");
-					
-		
-					
-					this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
-					this.controleFase = new ControleFase(this.tela.getTelaAnd(), this.protagonista, this.tela.getTelaInventario());
-					this.controleFase.start();
-					
-					this.tela.getTelaInventario().getLbNomeFase().setText("AND");
-					numeroFase = 5;
-					break;
-				case 2:
-					
-					break;
-				case 3:
-					
-					break;
-				case 4:
-	
-					break;
-				case 5:
-					;
-					break;
-			
+	public void trocarFase(){
+		switch (numeroFase) {
+			case 1:
+				
+				transicao("and");
+				this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
+				this.controleFase = new ControleFase(this.tela.getTelaAnd(), this.protagonista, this.tela.getTelaInventario());
+				this.controleFase.start();
+				
+				this.tela.getTelaInventario().getLbNomeFase().setText("AND");
+				this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"1");
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
 			}
-			
-			
-			
-			
-			
-		}
-
 	}
+	
+	
+			
+			
+			
+			
+		
+
+	
 
 
 	public ControleFase getControleFase() {

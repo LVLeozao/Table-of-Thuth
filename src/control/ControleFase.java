@@ -26,28 +26,25 @@ public class ControleFase extends Thread{
 	private Protagonista protagonista;
 	private ArrayList<Bau> baus;
 	private ArrayList<Rectangle> matzColisao;
-	private Boolean pausa;
+	
 	private TelaInventario telaInventario;
 	private Som somBau;
-	
 	private Timer timer;
 	
 	public ControleFase(TelaJogo telaJogo, Protagonista protagonista, TelaInventario telaInventario){
-		
 		this.telaInventario = telaInventario;
-	
 		this.telaJogo = telaJogo;
-		
 		this.somBau = new Som("sons/somBau.wav");
 		
 		this.protagonista = protagonista;
 		this.telaJogo.getPersonagens().add(protagonista);
 		this.personagens = telaJogo.getPersonagens();
 		
-		this.pausa = false;
 		this.baus = telaJogo.getBaus();
 		this.matzColisao = telaJogo.getMatzColisao();
+		
 		ativarThread();
+		
 		this.telaJogo.setTelaAtiva(true);
 		this.telaJogo.addKeyListener(new ControlePersonagem(this.protagonista, this.matzColisao, this.personagens));
 
@@ -57,8 +54,8 @@ public class ControleFase extends Thread{
 		this.telaInventario.setIiThumb(new ImageIcon(this.protagonista.getCaminhoTumb()));
 		this.telaInventario.repaint();
 		
-		new Timer(this.telaInventario, this.protagonista).start();
-		
+		timer = new Timer(this.telaInventario, this.protagonista);
+		timer.start();
 	}
 	
 	
@@ -155,22 +152,23 @@ public class ControleFase extends Thread{
 	public void run(){
 			
 		while(true){
-			while(!this.pausa){
-				if(telaJogo.getTelaAtiva()){
-					verificarVidaPersonagens();
-					telaJogo.repaint();
-					this.telaInventario.repaint();
-					if(this.protagonista.getIntersectBau()){
-						ativarBau();
-					}
-	
-					
+			if(telaJogo.getTelaAtiva()){
+				verificarVidaPersonagens();
+				telaJogo.repaint();
+				this.telaInventario.repaint();
+				if(this.protagonista.getIntersectBau()){
+					ativarBau();
 				}
-						
 			}
 		}
 		
 		
+	}
+
+
+
+	public Timer getTimer() {
+		return timer;
 	}
 
 }
