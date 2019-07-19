@@ -39,21 +39,25 @@ public class TelaAbertura extends JPanel {
 		btnSingle.setContentAreaFilled(false);
 		btnSingle.setBorderPainted(false);
 		btnSingle.setBounds(937, 430, 60, 60);
+		btnSingle.setToolTipText("Single");
 		
 		btnMultiplayer = new JButton(iiMultiplayer);
 		btnMultiplayer.setContentAreaFilled(false);
 		btnMultiplayer.setBorderPainted(false);
 		btnMultiplayer.setBounds(937, 495, 60, 60);
+		btnMultiplayer.setToolTipText("Multiplayer");
 		
 		btnConfig = new JButton(iiConfig);
 		btnConfig.setContentAreaFilled(false);
 		btnConfig.setBorderPainted(false);
 		btnConfig.setBounds(937, 560, 60, 60);
+		btnConfig.setToolTipText("Configurações");
 		
 		btnExit = new JButton(iiExit);
 		btnExit.setContentAreaFilled(false);
 		btnExit.setBorderPainted(false);
 		btnExit.setBounds(937, 625, 60, 60);
+		btnExit.setToolTipText("Sair");
 
 		
 		

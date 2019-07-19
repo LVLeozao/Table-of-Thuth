@@ -16,7 +16,7 @@ public class TelaSelecao extends JPanel{
 	private JButton btnVoltar, btnConfirmar;
 	private JTextField tfNome;
 	private String selecionado;
-	private String nome;
+
 	
 	
 	public TelaSelecao(){
@@ -67,16 +67,6 @@ public class TelaSelecao extends JPanel{
 	
 	
 
-
-
-	public String getNome() {
-		return nome;
-	}
-
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 
 	

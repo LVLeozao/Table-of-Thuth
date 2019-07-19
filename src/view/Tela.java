@@ -36,7 +36,7 @@ public class Tela extends JFrame implements Cloneable{
 		setLayout(null);
 		
 		this.cardGeral = new CardLayout();
-		//this.cardJogavel = new CardLayout();
+		this.cardJogavel = new CardLayout();
 		this.cardInventario = new CardLayout();
 		
 		panelGeral = new JPanel();
@@ -53,23 +53,27 @@ public class Tela extends JFrame implements Cloneable{
 		panelInventario.setVisible(false);
 		panelInventario.setBounds(800, 0, 200, 704);
 		
-		/*this.telaAnd = new TelaAnd();
+		this.telaAnd = new TelaAnd();
 		this.telaOr = new TelaOr();
-		this.telaNot = new TelaNot();*/
+		this.telaNot = new TelaNot();
+		
 		
 		this.telaAbertura = new TelaAbertura();
 		this.telaInformacoes = new TelaInformacoes();
 		this.telaSelecao = new TelaSelecao();
 		this.telaInventario = new TelaInventario();
 		this.telaPausa = new TelaPausa();
-	
-		/*cardJogavel.addLayoutComponent(telaAnd, "1");
-		cardJogavel.addLayoutComponent(telaOr, "2");
-		cardJogavel.addLayoutComponent(telaNot, "3");*/
+		this.telaResultado = new TelaResultado();
 		
-		/*panelJogavel.add(telaAnd);
+		cardJogavel.addLayoutComponent(telaAnd, "1");
+		cardJogavel.addLayoutComponent(telaOr, "2");
+		cardJogavel.addLayoutComponent(telaNot, "3");
+		cardJogavel.addLayoutComponent(telaResultado, "4");
+		
+		panelJogavel.add(telaAnd);
 		panelJogavel.add(telaOr);
-		panelJogavel.add(telaNot);*/
+		panelJogavel.add(telaNot);
+		panelJogavel.add(telaResultado);
 		
 		
 		cardGeral.addLayoutComponent(this.telaAbertura, "1");
@@ -92,7 +96,7 @@ public class Tela extends JFrame implements Cloneable{
 		
 		add(panelGeral);
 		add(panelInventario);
-		//add(panelJogavel);
+		add(panelJogavel);
 		
 		cardGeral.show(panelGeral, "1");
 		
@@ -224,6 +228,13 @@ public class Tela extends JFrame implements Cloneable{
 
 	public void setTelaInventario(TelaInventario telaInventario) {
 		this.telaInventario = telaInventario;
+	}
+
+
+
+
+	public TelaResultado getTelaResultado() {
+		return telaResultado;
 	}
 	
 	

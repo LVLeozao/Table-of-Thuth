@@ -58,6 +58,8 @@ public class Controle implements ActionListener, MouseListener {
 		this.telaPausa.getBtnVoltar().addActionListener(this);
 		this.telaPausa.getBtnSair().addActionListener(this);
 		
+		this.tela.getTelaResultado().getBtnConfirmar().addActionListener(this);
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -85,6 +87,7 @@ public class Controle implements ActionListener, MouseListener {
 		
 		else if(e.getSource() == this.telaInformacoes.getBtnVoltar() || e.getSource() == this.telaSelecao.getBtnVoltar()){
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
+			
 			this.telaSelecao.getLbInfo().setText("");
 			this.telaSelecao.getTfNome().setText("");
 			this.telaSelecao.setSelecionado("");
@@ -105,12 +108,12 @@ public class Controle implements ActionListener, MouseListener {
 				if(!this.telaSelecao.getTfNome().getText().equals("")){
 					
 					try {
-						if (this.telaSelecao.getNome().equalsIgnoreCase("Rebekah")) {
+						if (this.telaSelecao.getSelecionado().equalsIgnoreCase("Rebekah")) {
 
 							this.protagonista = new Protagonista("img/Rebekah.png", 32, 32, 4, 3, 0, 2000, 32, 96, this.tela.getTelaSelecao().getTfNome().getText(), true,
 									"img/Raio.png", 4, 128, 500, "src/img/F.png");
 						}
-						else if (this.telaSelecao.getNome().equalsIgnoreCase("Niklaus")) {
+						else if (this.telaSelecao.getSelecionado().equalsIgnoreCase("Niklaus")) {
 							this.protagonista = new Protagonista("img/Niklaus.png", 32, 32, 4, 3, 0, 2000, 32, 96, this.tela.getTelaSelecao().getTfNome().getText(), true,
 									"img/Raio.png", 4, 128, 500, "src/img/M.png");
 						}
@@ -123,18 +126,17 @@ public class Controle implements ActionListener, MouseListener {
 					
 					
 					this.controleFases = new ControleFases(tela, this.protagonista);
-			
+					this.controleFases.start();
+					
+					this.telaSelecao.setSelecionado("");
+					this.telaSelecao.getLbInfo().setText("");
+					this.telaSelecao.getTfNome().setText("");
 					
 				}
 				
 			}
 		}
 		
-		else if(e.getSource() == this.tela.getTelaInventario().getBtnPausar()){
-		
-			this.controleFases.getControleFase().desativarThread();
-			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "2");
-		}
 		else if(e.getSource() == this.tela.getTelaPausa().getBtnSair()){
 			Runtime rt = Runtime.getRuntime();
 			System.out.println("Memória total da JVM: " + rt.totalMemory());
@@ -148,17 +150,19 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getPanelGeral().setVisible(true);
 			this.controleFases.getControleFase().desativarThread();
 			this.controleFases.getControleFase().getTimer().stop();
-			//setar para null
 			this.controleFases.getControleFase().stop();
+			
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
 		
 			this.controleFases = null;
 			System.gc();
 			
 			
-			this.tela.getPanelJogavel().remove(0);
-			this.tela.getPanelJogavel().remove(1);
-		
+			this.tela.getPanelJogavel().remove(this.tela.getTelaAnd());
+			this.tela.getPanelJogavel().remove(this.tela.getTelaOr());
+			this.tela.getPanelJogavel().remove(this.tela.getTelaNot());
+			this.tela.getPanelJogavel().remove(this.tela.getTelaResultado());
+			
 			
 			this.tela.setTelaAnd(null);
 			System.gc();
@@ -172,10 +176,10 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getPanelJogavel().setLayout(null);
 			System.gc();
 			this.tela.remove(this.tela.getPanelJogavel());
-		
+			this.protagonista = null;
 			
 			System.gc();
-			System.out.println("Memória depois executar o gc: " + rt.freeMemory());
+			
 			
 			
 			//Setando novamente
@@ -184,17 +188,20 @@ public class Controle implements ActionListener, MouseListener {
 			tela.setTelaAnd(new TelaAnd());
 			tela.setTelaNot(new TelaNot());
 			tela.setTelaOr(new TelaOr());
+
 			
 			this.tela.setCardJogavel(new CardLayout());
 			this.tela.getPanelJogavel().setLayout(this.tela.getCardJogavel());
-			tela.getCardJogavel().addLayoutComponent(this.tela.getTelaAnd(), "1");
-			tela.getCardJogavel().addLayoutComponent(this.tela.getTelaOr(), "2");
-			tela.getCardJogavel().addLayoutComponent(this.tela.getTelaNot(), "3");
+			this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaAnd(), "1");
+			this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaOr(), "2");
+			this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaNot(), "3");
+			this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaResultado(), "4");
 			
 			
 			this.tela.getPanelJogavel().add(this.tela.getTelaAnd());
 			this.tela.getPanelJogavel().add(this.tela.getTelaOr());
 			this.tela.getPanelJogavel().add(this.tela.getTelaNot());
+			this.tela.getPanelJogavel().add(this.tela.getTelaResultado());
 			
 			this.tela.add(this.tela.getPanelJogavel());
 			
@@ -202,9 +209,19 @@ public class Controle implements ActionListener, MouseListener {
 			
 			
 		}
-		
-		else if(e.getSource() == this.telaPausa.getBtnVoltar()){
+		else if(e.getSource() == this.tela.getTelaResultado().getBtnConfirmar()){
+			this.controleFases.mudarNumeroFase();
+			this.controleFases.trocarFase();
+		}
+		else if(e.getSource() == this.tela.getTelaInventario().getBtnPausar()){
+			this.controleFases.getControleFase().getTimer().setPausa(true);
+			this.controleFases.getControleFase().desativarThread();
+			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "2");
+		}
+		else if(e.getSource() == this.tela.getTelaPausa().getBtnVoltar()){
 			this.controleFases.getControleFase().ativarThread();
+			this.controleFases.getControleFase().getTimer().setPausa(false);
+			
 			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
 		}
 	}
@@ -215,7 +232,7 @@ public class Controle implements ActionListener, MouseListener {
 			this.telaSelecao.getLbInfo().setText("Rebekah Selecionada");
 			this.telaSelecao.getLbInfo().setForeground(new Color(113,177,169));
 			this.telaSelecao.setSelecionado("Rebekah");
-			this.telaSelecao.setNome("Rebekah");
+			
 			
 			
 		}
@@ -224,7 +241,7 @@ public class Controle implements ActionListener, MouseListener {
 			this.telaSelecao.getLbInfo().setText("Niklaus Selecionado");
 			this.telaSelecao.getLbInfo().setForeground(new Color(255, 171,15));
 			this.telaSelecao.setSelecionado("Niklaus");
-			this.telaSelecao.setNome("Niklaus");
+			
 		}
 		
 		

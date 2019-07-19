@@ -16,7 +16,7 @@ public class TelaResultado extends JPanel {
 	
 	public TelaResultado(){
 		setLayout(null);
-		
+		setSize(800, 704);
 		int font = 50;
 		this.btnConfirmar = new JButton(new ImageIcon("src/img/Confirmar.png"));
 		this.btnConfirmar.setContentAreaFilled(false);
@@ -52,6 +52,41 @@ public class TelaResultado extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(new ImageIcon("src/img/TelaCompleta.png").getImage(), 0, 0, this);
+	}
+
+
+	public JLabel getLbPontuacao() {
+		return lbPontuacao;
+	}
+
+
+	public void setLbPontuacao(JLabel lbPontuacao) {
+		this.lbPontuacao = lbPontuacao;
+	}
+
+
+	public JLabel getLbPntBau() {
+		return lbPntBau;
+	}
+
+
+	public void setLbPntBau(JLabel lbPntBau) {
+		this.lbPntBau = lbPntBau;
+	}
+
+
+	public JLabel getLbTempo() {
+		return lbTempo;
+	}
+
+
+	public void setLbTempo(JLabel lbTempo) {
+		this.lbTempo = lbTempo;
+	}
+
+
+	public JButton getBtnConfirmar() {
+		return btnConfirmar;
 	}
 	
 

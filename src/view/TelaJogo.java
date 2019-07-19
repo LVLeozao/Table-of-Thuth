@@ -70,9 +70,9 @@ public abstract class TelaJogo extends JPanel {
 
 			personagens = new ArrayList<Personagem>();
 
-			inimigo1 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 160, 640, true, poderImagemInimigo, 4, 128, 500, "", 0);
-			inimigo2 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 536, 136, true, poderImagemInimigo, 4, 128, 500, "", 0);
-			inimigo3 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 708, 436, true, poderImagemInimigo, 4, 128, 500, "", 0);
+			inimigo1 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500, "", 0);
+			inimigo2 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500, "", 0);
+			inimigo3 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500, "", 0);
 
 			personagens.add(inimigo1);
 			personagens.add(inimigo2);

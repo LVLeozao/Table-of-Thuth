@@ -28,27 +28,7 @@ public class ControleFases extends Thread {
 		this.protagonista = protagonista;
 		this.tela.getPanelGeral().setVisible(false);
 		
-		
-		//Setar vida, setar tempo
-		
-		tela.setTelaAnd(new TelaAnd());
-		tela.setTelaNot(new TelaNot());
-		tela.setTelaOr(new TelaOr());
-		
-		this.tela.setCardJogavel(new CardLayout());
-		this.tela.getPanelJogavel().setLayout(this.tela.getCardJogavel());
-		tela.getCardJogavel().addLayoutComponent(this.tela.getTelaAnd(), "1");
-		tela.getCardJogavel().addLayoutComponent(this.tela.getTelaOr(), "2");
-		tela.getCardJogavel().addLayoutComponent(this.tela.getTelaNot(), "3");
-		
-		this.tela.getPanelJogavel().add(this.tela.getTelaAnd());
-		this.tela.getPanelJogavel().add(this.tela.getTelaOr());
-		this.tela.getPanelJogavel().add(this.tela.getTelaNot());
-		
-		this.tela.add(this.tela.getPanelJogavel());
 	
-		
-		
 		this.tela.getPanelInventario().setVisible(true);
 		this.tela.getPanelJogavel().setVisible(true);
 		
@@ -66,29 +46,71 @@ public class ControleFases extends Thread {
 		numeroFase+=1;
 	}
 	
+	public void mostrarResultado(){
+		
+		this.tela.getTelaResultado().getLbTempo().setText(this.protagonista.getTempo());
+		this.tela.getTelaResultado().getLbPntBau().setText(this.protagonista.getQntBausAbertos() * (-10)+"");
+		this.tela.getTelaResultado().getLbPontuacao().setText(this.protagonista.getPontuacao()+"");
+		System.out.println("DEPOIS");
+		this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"4");
+		System.out.println("PASSOU2");
+		
+	}
+	
+		
 	public void trocarFase(){
 		switch (numeroFase) {
 			case 1:
 				
 				transicao("and");
-				this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
-				this.controleFase = new ControleFase(this.tela.getTelaAnd(), this.protagonista, this.tela.getTelaInventario());
+				this.controleFase = new ControleFase(this.tela.getTelaAnd(), this.protagonista, this.tela.getTelaInventario(), this);
 				this.controleFase.start();
 				
 				this.tela.getTelaInventario().getLbNomeFase().setText("AND");
 				this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"1");
+				this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
 				break;
 			case 2:
+				this.protagonista.setPosX(352);
+				this.protagonista.setPosY(576);
 				
+				transicao("or");
+				this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
+				this.controleFase = new ControleFase(this.tela.getTelaOr(), this.protagonista, this.tela.getTelaInventario(), this);
+				this.controleFase.start();
+				
+				this.tela.getTelaInventario().getLbNomeFase().setText("OR");
+				this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"2");
 				break;
+				
 			case 3:
 				
 				break;
 			}
 	}
 	
+	public void verificarFase(){
+		
+		if(this.controleFase.getQntInimigosMortos() == 3){
+			this.controleFase.desativarThread();
+			this.controleFase.getTimer().stop();
+			this.controleFase.stop();
+			mostrarResultado();
+			
+			
+			
+		}
+		
+	}
 	
 			
+	public void run(){
+		while(true && this.isAlive()){
+			if(this.controleFase != null && this.controleFase.isAlive()){
+				verificarFase();
+			}
+		}
+	}
 			
 			
 			
@@ -99,6 +121,11 @@ public class ControleFases extends Thread {
 
 	public ControleFase getControleFase() {
 		return controleFase;
+	}
+
+
+	public void setControleFase(ControleFase controleFase) {
+		this.controleFase = controleFase;
 	}
 	
 	

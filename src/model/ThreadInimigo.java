@@ -41,7 +41,7 @@ public class ThreadInimigo extends Thread{
 		random = new Random();
 		
 		while(inimigo.isCondicaoExistencia()){
-			
+			System.out.println("Ta funcionando.");
 			try {
 				int direcao = random.nextInt(5);
 				
