@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 public class Inimigo extends Personagem{
 	private String texto;
 	private int resposta;
+	
+	//private Exercicio exercicio;
 
 	public Inimigo(String fileImage, int largura, int altura, int linhas, int colunas, int aparencia, int qntVida,
 			int posX, int posY, boolean condicaoExistencia, String poderImage,

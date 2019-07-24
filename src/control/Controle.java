@@ -45,9 +45,11 @@ public class Controle implements ActionListener, MouseListener {
 		this.telaAbertura.getBtnConfig().addActionListener(this);
 		this.telaAbertura.getBtnExit().addActionListener(this);
 		this.telaAbertura.getBtnSingle().addActionListener(this);
+		this.telaAbertura.getBtnMultiplayer().addActionListener(this);
 		this.telaInformacoes.getBtnControle().addActionListener(this);
 		this.telaInformacoes.getBtnCreditos().addActionListener(this);
 		this.telaInformacoes.getBtnSobre().addActionListener(this);
+		this.telaInformacoes.getBtnResultados().addActionListener(this);
 		this.telaInformacoes.getBtnVoltar().addActionListener(this);
 		this.telaSelecao.getBtnConfirmar().addActionListener(this);
 		this.telaSelecao.getBtnVoltar().addActionListener(this);
@@ -55,10 +57,20 @@ public class Controle implements ActionListener, MouseListener {
 		this.telaSelecao.getLbMasculino().addMouseListener(this);
 		
 		this.telaInventario.getBtnPausar().addActionListener(this);
+		
+	
 		this.telaPausa.getBtnVoltar().addActionListener(this);
 		this.telaPausa.getBtnSair().addActionListener(this);
-		
+		this.telaPausa.getBtnConfiguracao().addActionListener(this);
 		this.tela.getTelaResultado().getBtnConfirmar().addActionListener(this);
+		this.tela.getTelaResultado().getBtnComecar().addActionListener(this);
+		this.tela.getTelaResultado().getBtnSair().addActionListener(this);
+		
+		this.tela.getTelaConfig().getBtnVoltar().addActionListener(this);
+		
+		//this.tela.getTelaInventarioMultiplayer().getBtnPausar().addActionListener(this);
+		
+		
 		
 	}
 	
@@ -67,6 +79,31 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "2");
 		}
 		
+		else if(e.getSource()== this.tela.getTelaConfig().getBtnVoltar()){
+			this.tela.getTelaConfig().setVisible(false);
+		}
+		
+		else if(e.getSource() == this.tela.getTelaInventarioMultiplayer().getBtnPausar()){
+			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "2");
+			this.tela.getMultiplayer().setFocusable(false);
+		}
+		
+		else if(e.getSource() == this.tela.getTelaAbertura().getBtnMultiplayer()){
+			this.tela.getPanelGeral().setVisible(false);
+			this.tela.getPanelInventario().setVisible(true);
+			this.tela.getPanelJogavel().setVisible(true);
+		
+			this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"5");
+			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "3");
+			ControleMultiplayer  controlMulti = new ControleMultiplayer(this.tela.getTelaInventarioMultiplayer(), this.tela.getMultiplayer(), tela);
+			controlMulti.start();
+			
+
+			this.tela.getMultiplayer().setFocusable(true);
+			this.tela.getMultiplayer().requestFocus(true);
+			
+			
+		}
 		else if(e.getSource() == this.tela.getTelaInformacoes().getBtnControle()){
 			this.telaInformacoes.getLbControle().setVisible(true);
 			this.telaInformacoes.getLbSobre().setVisible(false);
@@ -93,6 +130,19 @@ public class Controle implements ActionListener, MouseListener {
 			this.telaSelecao.setSelecionado("");
 			
 		}
+		
+
+		else if(e.getSource() == this.telaInformacoes.getBtnResultados()){
+			this.telaInformacoes.getLbControle().setVisible(false);
+			this.telaInformacoes.getLbSobre().setVisible(false);
+			this.telaInformacoes.getLbCredito().setVisible(false);
+			this.telaInformacoes.getTextArea().setVisible(true);
+		}
+		
+		
+		
+		
+		
 		else if(e.getSource() == this.telaAbertura.getBtnExit()){
 			System.exit(0);
 		}
@@ -111,11 +161,11 @@ public class Controle implements ActionListener, MouseListener {
 						if (this.telaSelecao.getSelecionado().equalsIgnoreCase("Rebekah")) {
 
 							this.protagonista = new Protagonista("img/Rebekah.png", 32, 32, 4, 3, 0, 2000, 32, 96, this.tela.getTelaSelecao().getTfNome().getText(), true,
-									"img/Raio.png", 4, 128, 500, "src/img/F.png");
+									"img/Raio.png", 4, 128, 500, "src/img/F.png", 1);
 						}
 						else if (this.telaSelecao.getSelecionado().equalsIgnoreCase("Niklaus")) {
 							this.protagonista = new Protagonista("img/Niklaus.png", 32, 32, 4, 3, 0, 2000, 32, 96, this.tela.getTelaSelecao().getTfNome().getText(), true,
-									"img/Raio.png", 4, 128, 500, "src/img/M.png");
+									"img/Raio.png", 4, 128, 500, "src/img/M.png", 1);
 						}
 
 					} 
@@ -138,81 +188,26 @@ public class Controle implements ActionListener, MouseListener {
 		}
 		
 		else if(e.getSource() == this.tela.getTelaPausa().getBtnSair()){
-			Runtime rt = Runtime.getRuntime();
-			System.out.println("Memória total da JVM: " + rt.totalMemory());
-			System.out.println("Memória antes da criação dos objetos: " + rt.freeMemory());
-		  
-		  
+				
+			this.parar();
 			
-			//Parando
-			this.tela.getPanelInventario().setVisible(false);
-			this.tela.getPanelJogavel().setVisible(false);
-			this.tela.getPanelGeral().setVisible(true);
-			this.controleFases.getControleFase().desativarThread();
-			this.controleFases.getControleFase().getTimer().stop();
-			this.controleFases.getControleFase().stop();
-			
-			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
+			this.tela.getMultiplayer().setFocusable(false);
 		
-			this.controleFases = null;
-			System.gc();
-			
-			
-			this.tela.getPanelJogavel().remove(this.tela.getTelaAnd());
-			this.tela.getPanelJogavel().remove(this.tela.getTelaOr());
-			this.tela.getPanelJogavel().remove(this.tela.getTelaNot());
-			this.tela.getPanelJogavel().remove(this.tela.getTelaResultado());
-			
-			
-			this.tela.setTelaAnd(null);
-			System.gc();
-			this.tela.setTelaNot(null);
-			System.gc();
-			this.tela.setTelaOr(null);
-			System.gc();
-			
-			this.tela.setCardJogavel(null);
-			System.gc();
-			this.tela.getPanelJogavel().setLayout(null);
-			System.gc();
-			this.tela.remove(this.tela.getPanelJogavel());
-			this.protagonista = null;
-			
-			System.gc();
-			
-			
-			
-			//Setando novamente
-			
-		
-			tela.setTelaAnd(new TelaAnd());
-			tela.setTelaNot(new TelaNot());
-			tela.setTelaOr(new TelaOr());
-
-			
-			this.tela.setCardJogavel(new CardLayout());
-			this.tela.getPanelJogavel().setLayout(this.tela.getCardJogavel());
-			this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaAnd(), "1");
-			this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaOr(), "2");
-			this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaNot(), "3");
-			this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaResultado(), "4");
-			
-			
-			this.tela.getPanelJogavel().add(this.tela.getTelaAnd());
-			this.tela.getPanelJogavel().add(this.tela.getTelaOr());
-			this.tela.getPanelJogavel().add(this.tela.getTelaNot());
-			this.tela.getPanelJogavel().add(this.tela.getTelaResultado());
-			
-			this.tela.add(this.tela.getPanelJogavel());
-			
-			
-			
-			
 		}
-		else if(e.getSource() == this.tela.getTelaResultado().getBtnConfirmar()){
-			this.controleFases.mudarNumeroFase();
+		
+		else if(e.getSource() == this.tela.getTelaResultado().getBtnComecar()){
+			this.tela.getTelaResultado().setFocusable(false);
 			this.controleFases.trocarFase();
+			
 		}
+		
+		else if(e.getSource() == this.tela.getTelaResultado().getBtnConfirmar()){
+			this.controleFases.setNumeroFase(this.controleFases.getNumeroFase()+1);
+			this.tela.getTelaResultado().setFocusable(false);
+			this.controleFases.transicao();
+			
+		}
+		
 		else if(e.getSource() == this.tela.getTelaInventario().getBtnPausar()){
 			this.controleFases.getControleFase().getTimer().setPausa(true);
 			this.controleFases.getControleFase().desativarThread();
@@ -221,8 +216,16 @@ public class Controle implements ActionListener, MouseListener {
 		else if(e.getSource() == this.tela.getTelaPausa().getBtnVoltar()){
 			this.controleFases.getControleFase().ativarThread();
 			this.controleFases.getControleFase().getTimer().setPausa(false);
-			
 			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
+		}
+		
+		else if(e.getSource() == this.tela.getTelaPausa().getBtnConfiguracao()){
+			this.tela.getTelaConfig().setVisible(true);
+		}
+		
+		
+		else if(e.getSource() == this.tela.getTelaResultado().getBtnSair()){
+			this.parar();
 		}
 	}
 
@@ -246,6 +249,75 @@ public class Controle implements ActionListener, MouseListener {
 		
 		
 		
+	}
+	
+	public void parar(){
+		//Parando
+		this.tela.getPanelInventario().setVisible(false);
+		this.tela.getPanelJogavel().setVisible(false);
+		this.tela.getPanelGeral().setVisible(true);
+		this.controleFases.getControleFase().desativarThread();
+		this.controleFases.getControleFase().getTimer().stop();
+		this.controleFases.getControleFase().stop();
+		this.tela.getTelaResultado().getBtnComecar().setVisible(false);
+		this.tela.getTelaResultado().getBtnConfirmar().setVisible(false);
+		this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
+	
+		this.controleFases = null;
+		System.gc();
+		
+		
+		this.tela.getPanelJogavel().remove(this.tela.getTelaAnd());
+		this.tela.getPanelJogavel().remove(this.tela.getTelaOr());
+		this.tela.getPanelJogavel().remove(this.tela.getTelaNot());
+		this.tela.getPanelJogavel().remove(this.tela.getTelaResultado());
+		
+		
+		this.tela.setTelaAnd(null);
+		System.gc();
+		this.tela.setTelaNot(null);
+		System.gc();
+		this.tela.setTelaOr(null);
+		System.gc();
+		
+		this.tela.setCardJogavel(null);
+		System.gc();
+		this.tela.getPanelJogavel().setLayout(null);
+		System.gc();
+		this.tela.remove(this.tela.getPanelJogavel());
+		this.protagonista = null;
+		
+		System.gc();
+		
+		
+		
+		//Setando novamente
+		
+	
+		tela.setTelaAnd(new TelaAnd());
+		tela.setTelaNot(new TelaNot());
+		tela.setTelaOr(new TelaOr());
+
+		
+		this.tela.setCardJogavel(new CardLayout());
+		this.tela.getPanelJogavel().setLayout(this.tela.getCardJogavel());
+		this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaAnd(), "1");
+		this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaOr(), "2");
+		this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaNot(), "3");
+		this.tela.getCardJogavel().addLayoutComponent(this.tela.getTelaResultado(), "4");
+		
+		
+		this.tela.getPanelJogavel().add(this.tela.getTelaAnd());
+		this.tela.getPanelJogavel().add(this.tela.getTelaOr());
+		this.tela.getPanelJogavel().add(this.tela.getTelaNot());
+		this.tela.getPanelJogavel().add(this.tela.getTelaResultado());
+		
+		this.tela.add(this.tela.getPanelJogavel());
+		
+		
+		
+		
+
 	}
 
 	@Override

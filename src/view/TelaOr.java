@@ -8,7 +8,6 @@ public class TelaOr extends TelaJogo{
 	
 	
 	public TelaOr() {
-		//concertar caminhos;
 		super("img/piso2.png", "img/parede2.png", "img/Objetos2.png", "arquivos/chaoMapa02.txt", "arquivos/paredeMapa02.txt",
 				"arquivos/ObjetosMapa02.txt", "img/inimigoAnd.png", "img/Fogo.png");
 		
@@ -16,7 +15,7 @@ public class TelaOr extends TelaJogo{
 		getInimigo1().setResposta(0);
 		
 		getInimigo2().setTexto("Se a Thread não for nula ou estiver ativada o processo será realizado.\n\nP1: Thread - NullPointerException \n"
-				+ "false\nC: ?? \n\nQual a saída para P1vP2 = C");
+				+ "P2: false\nC: ?? \n\nQual a saída para P1vP2 = C");
 		getInimigo2().setResposta(1);
 		
 		getInimigo3().setTexto("P1: Pi é um número racional\nP2: Raiz quadrada de 2 é um número irracional\nC: ??\n\nQual a saída para P1vP2 = C");

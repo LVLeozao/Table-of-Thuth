@@ -13,27 +13,32 @@ import model.Camada;
 import model.Inimigo;
 import model.Personagem;
 import model.Protagonista;
+import model.XmlUsuario;
 
-public class Tela extends JFrame implements Cloneable{
+public class Tela extends JFrame{
 	private JPanel panelGeral, panelJogavel, panelInventario;
 	private TelaAnd telaAnd; 
 	private TelaOr telaOr;	
 	private TelaNot telaNot;
 	private CardLayout cardGeral, cardJogavel, cardInventario;
+	private TelaConfiguracoes telaConfig;
 
 	private TelaPausa telaPausa;
 	private TelaAbertura telaAbertura;
 	private TelaInformacoes telaInformacoes;
 	private TelaSelecao telaSelecao;
 	private TelaInventario telaInventario;
-	private TelaResultado telaResultado;
-	
+	private TelaTransicao telaTransicao;
+	private XmlUsuario xml;
+	private TelaInventarioMultiplayer telaInventarioMultiplayer;
+	private Multiplayer multiplayer;
 	
 	public Tela(){
 		setSize(1000,704);
 		setLocationRelativeTo(null);
 		setUndecorated(true);
 		setLayout(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		this.cardGeral = new CardLayout();
 		this.cardJogavel = new CardLayout();
@@ -56,24 +61,29 @@ public class Tela extends JFrame implements Cloneable{
 		this.telaAnd = new TelaAnd();
 		this.telaOr = new TelaOr();
 		this.telaNot = new TelaNot();
+		this.multiplayer = new Multiplayer();
 		
 		
 		this.telaAbertura = new TelaAbertura();
 		this.telaInformacoes = new TelaInformacoes();
 		this.telaSelecao = new TelaSelecao();
 		this.telaInventario = new TelaInventario();
+		this.telaInventarioMultiplayer = new TelaInventarioMultiplayer();
 		this.telaPausa = new TelaPausa();
-		this.telaResultado = new TelaResultado();
+		this.telaTransicao = new TelaTransicao();
 		
 		cardJogavel.addLayoutComponent(telaAnd, "1");
 		cardJogavel.addLayoutComponent(telaOr, "2");
 		cardJogavel.addLayoutComponent(telaNot, "3");
-		cardJogavel.addLayoutComponent(telaResultado, "4");
+		cardJogavel.addLayoutComponent(telaTransicao, "4");
+		cardJogavel.addLayoutComponent(multiplayer, "5");
+		
 		
 		panelJogavel.add(telaAnd);
 		panelJogavel.add(telaOr);
 		panelJogavel.add(telaNot);
-		panelJogavel.add(telaResultado);
+		panelJogavel.add(telaTransicao);
+		panelJogavel.add(multiplayer);
 		
 		
 		cardGeral.addLayoutComponent(this.telaAbertura, "1");
@@ -87,12 +97,14 @@ public class Tela extends JFrame implements Cloneable{
 		
 		cardInventario.addLayoutComponent(this.telaInventario, "1");
 		cardInventario.addLayoutComponent(this.telaPausa, "2");
+		cardInventario.addLayoutComponent(this.telaInventarioMultiplayer, "3");
 		panelInventario.add(telaInventario);
 		panelInventario.add(telaPausa);
-	
+		panelInventario.add(telaInventarioMultiplayer);
 		
+		xml = new XmlUsuario();
 		
-		
+		this.telaConfig = new TelaConfiguracoes();
 		
 		add(panelGeral);
 		add(panelInventario);
@@ -105,6 +117,13 @@ public class Tela extends JFrame implements Cloneable{
 	}
 	
 	
+
+
+	public XmlUsuario getXml() {
+		return xml;
+	}
+
+
 
 
 	public TelaPausa getTelaPausa() {
@@ -233,8 +252,29 @@ public class Tela extends JFrame implements Cloneable{
 
 
 
-	public TelaResultado getTelaResultado() {
-		return telaResultado;
+	public TelaTransicao getTelaResultado() {
+		return telaTransicao;
+	}
+
+
+
+
+	public TelaInventarioMultiplayer getTelaInventarioMultiplayer() {
+		return telaInventarioMultiplayer;
+	}
+
+
+
+
+	public Multiplayer getMultiplayer() {
+		return multiplayer;
+	}
+
+
+
+
+	public TelaConfiguracoes getTelaConfig() {
+		return telaConfig;
 	}
 	
 	

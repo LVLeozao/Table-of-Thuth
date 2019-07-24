@@ -88,6 +88,10 @@ public class Poder extends Sprite{
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
+
+	public void setDano(int dano) {
+		this.dano = dano;
+	}
 	
 	
 	

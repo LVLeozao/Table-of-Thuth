@@ -17,9 +17,8 @@ public class TelaInventario extends JPanel{
 	
 	private ImageIcon iiPausar;
 	private JLabel lbNome, lbPontuacao, lbNomeFase;
-	private JProgressBar barraVida;
 	private JButton btnPausar;
-	private String nomePersonagem, camingoImagemBackground, pontuacao;
+	//private String nomePersonagem, camingoImagemBackground, pontuacao;
 	private int qntBaus;
 	
 	private ImageIcon iiBg, iiThumb;
@@ -40,7 +39,7 @@ public class TelaInventario extends JPanel{
 		
 		this.iiPausar = new ImageIcon("src/img/Pausar.png");
 	
-		this.lbNome = new JLabel(this.nomePersonagem);
+		this.lbNome = new JLabel("");
 		lbNome.setFont(new Font("TimesRoman", Font.BOLD, 18));
 		lbNome.setForeground(new Color(255,255,255));
 		lbNome.setBounds(25, 330, 161, 20);
@@ -50,7 +49,7 @@ public class TelaInventario extends JPanel{
 		this.timer.setForeground(new Color(255,255,255));
 		this.timer.setBounds(73, 480, 161, 50);
 		
-		this.lbPontuacao = new JLabel(this.pontuacao);
+		this.lbPontuacao = new JLabel("");
 		lbPontuacao.setFont(new Font("TimesRoman", Font.BOLD, 18));
 		lbPontuacao.setForeground(new Color(255,255,255));
 		lbPontuacao.setBounds(25, 405, 161, 20);
@@ -87,7 +86,6 @@ public class TelaInventario extends JPanel{
 		
 		for (int i = 0; i < this.qntBaus; i++) {
 			g.drawImage(new ImageIcon("src/img/bauAberto.png").getImage(), posX, posY, this);
-			System.out.println(this.qntBaus);
 			posX = posX + 62;
 		}
 	
@@ -113,13 +111,7 @@ public class TelaInventario extends JPanel{
 		return btnPausar;
 	}
 
-	public String getNomePersonagem() {
-		return nomePersonagem;
-	}
-
-	public void setNomePersonagem(String nomePersonagem) {
-		this.nomePersonagem = nomePersonagem;
-	}
+	
 
 
 	public JLabel getLbNome() {

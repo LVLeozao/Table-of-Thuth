@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import model.Bau;
 import model.Camada;
+import model.GerarPosicao;
 import model.Inimigo;
 import model.Personagem;
 import model.Protagonista;
@@ -84,6 +85,21 @@ public abstract class TelaJogo extends JPanel {
 			e.printStackTrace();
 		}
 
+		int[] gerar; 
+		
+		
+		for (Personagem personagem : getPersonagens()) {
+			if(personagem instanceof Inimigo){
+				gerar = GerarPosicao.gerarPosicaoXY(this.matzColisao, this.camada2.mapa); 
+				
+				personagem.setPosX(gerar[0]);
+				personagem.setPosY(gerar[1]);
+				
+			}
+			
+		}
+		
+		
 		for (Personagem teste : this.personagens) {
 			add(teste.getLifeBar());
 		}
@@ -93,9 +109,7 @@ public abstract class TelaJogo extends JPanel {
 		
 	}
 	
-	public TelaJogo clone() throws CloneNotSupportedException {
-        return (TelaJogo) super.clone();
-    }
+
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

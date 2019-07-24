@@ -26,7 +26,6 @@ public class ThreadInimigo extends Thread{
 	public ThreadInimigo(Personagem inimigo, ArrayList<Personagem> personagens, ArrayList<Rectangle> matzColisao) {
 		
 		Inimigo temp = (Inimigo) inimigo;
-		// Arrumar o and !!! tem que passar tudo !!!!
 		this.inimigo = temp;
 		this.matzColisao = matzColisao;
 		this.personagens = personagens;
@@ -41,7 +40,6 @@ public class ThreadInimigo extends Thread{
 		random = new Random();
 		
 		while(inimigo.isCondicaoExistencia()){
-			System.out.println("Ta funcionando.");
 			try {
 				int direcao = random.nextInt(5);
 				

@@ -32,6 +32,7 @@ public class ControleFase extends Thread{
 	private Timer timer;
 	private int qntInimigosMortos;
 	private ControleFases controleFases;
+	private ControlePersonagem controlePersonagem;
 	
 	public ControleFase(TelaJogo telaJogo, Protagonista protagonista, TelaInventario telaInventario, ControleFases controleFases){
 		this.telaInventario = telaInventario;
@@ -42,6 +43,9 @@ public class ControleFase extends Thread{
 		this.telaJogo.getPersonagens().add(protagonista);
 		this.personagens = telaJogo.getPersonagens();
 		
+		
+		this.telaJogo.setFocusable(true);
+		this.telaJogo.requestFocus(true);
 		this.baus = telaJogo.getBaus();
 		this.matzColisao = telaJogo.getMatzColisao();
 		
@@ -52,7 +56,10 @@ public class ControleFase extends Thread{
 		ativarThread();
 		
 		this.telaJogo.setTelaAtiva(true);
-		this.telaJogo.addKeyListener(new ControlePersonagem(this.protagonista, this.matzColisao, this.personagens));
+		
+		this.controlePersonagem = new ControlePersonagem(this.protagonista, this.matzColisao, this.personagens);
+		this.telaJogo.addKeyListener(this.controlePersonagem);
+		this.controlePersonagem.start();
 		
 		
 		
@@ -63,9 +70,7 @@ public class ControleFase extends Thread{
 		
 		this.qntInimigosMortos = 0;
 		
-		
-		this.telaJogo.setFocusable(true);
-		this.telaJogo.requestFocus();
+
 		
 	}
 	
@@ -76,7 +81,8 @@ public class ControleFase extends Thread{
 	public void ativarThread(){
 		
 		this.telaJogo.setFocusable(true);
-		this.telaJogo.requestFocus();
+		this.telaJogo.requestFocus(true);
+		
 		thread1 = new ThreadInimigo(this.personagens.get(0), this.personagens, this.matzColisao);
 		thread1.start();
 		thread2 = new ThreadInimigo(this.personagens.get(1), this.personagens, this.matzColisao);
@@ -87,15 +93,19 @@ public class ControleFase extends Thread{
 	}
 	
 	public void desativarThread(){
-		this.telaJogo.setFocusable(false);
+		
 		thread1.stop();
 		thread2.stop();
 		thread3.stop();
+		
+		this.telaJogo.setFocusable(false);
+		this.telaJogo.requestFocus(false);
 		
 	}
 	
 	
 	public void responderQuestionario(Inimigo temp){
+		this.controlePersonagem.setDirecao(-1);
 		int resposta = ShowMessage.activeInputDialog(temp.getTexto());
 		
 		Protagonista temp2  = (Protagonista) this.personagens.get(3);
@@ -106,8 +116,7 @@ public class ControleFase extends Thread{
 			this.protagonista.getLifeBar().setValue(this.protagonista.getQntVida()+100);
 		}
 		else{
-			
-			this.protagonista.getLifeBar().setValue(this.protagonista.getQntVida()-500);
+			this.protagonista.setQntVida(this.protagonista.getQntVida()-100);
 		}
 		
 		ativarThread();
@@ -115,6 +124,11 @@ public class ControleFase extends Thread{
 	
 	public void ativarBau(){
 		for (Bau bau : baus){
+			
+			
+			
+			this.controlePersonagem.setDirecao(-1);
+			
 			if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== false){	
 					somBau.play();
 					bau.mostrarInformação();
@@ -149,6 +163,10 @@ public class ControleFase extends Thread{
 						
 					}
 					
+					else if(personagem instanceof Protagonista){
+						this.protagonista.setMorto(true);
+					}
+					
 					
 					
 				}
@@ -156,6 +174,8 @@ public class ControleFase extends Thread{
 				else{
 					personagem.getLifeBar().setValue(personagem.getQntVida());
 				}
+				
+				this.telaInventario.repaint();
 			}
 			
 			}
@@ -168,7 +188,7 @@ public class ControleFase extends Thread{
 			if(telaJogo.getTelaAtiva()){
 				verificarVidaPersonagens();
 				telaJogo.repaint();
-				this.telaInventario.repaint();
+				
 				if(this.protagonista.getIntersectBau()){
 					ativarBau();
 				}
@@ -186,6 +206,30 @@ public class ControleFase extends Thread{
 
 	public int getQntInimigosMortos() {
 		return qntInimigosMortos;
+	}
+
+
+
+
+
+	public ControlePersonagem getControlePersonagem() {
+		return controlePersonagem;
+	}
+
+
+
+
+
+	public void setQntInimigosMortos(int qntInimigosMortos) {
+		this.qntInimigosMortos = qntInimigosMortos;
+	}
+
+
+
+
+
+	public TelaJogo getTelaJogo() {
+		return telaJogo;
 	}
 
 

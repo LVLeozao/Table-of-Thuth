@@ -18,6 +18,8 @@ public class Sprite extends JProgressBar{
 	
 	public Sprite(String fileImage, int largura, int altura, int linhas, int colunas, int aparencia) throws IOException {
 		this.personagem = ImageIO.read(getClass().getClassLoader().getResource(fileImage));
+		
+		
 		this.largura = largura;
 		this.altura = altura;
 		this.linhas = linhas;
