@@ -18,6 +18,7 @@ public class Protagonista extends Personagem {
 	private boolean morto = false;
 	private ArrayList<String> tempoFases;
 	private int direcoes[];
+	private int sentido=-1;
 	
 	
 	
