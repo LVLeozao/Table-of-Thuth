@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import model.Bau;
+
 import model.Inimigo;
 import model.Personagem;
 import model.Protagonista;
@@ -26,47 +27,52 @@ public class ControleFase extends Thread{
 	private Protagonista protagonista;
 	private ArrayList<Bau> baus;
 	private ArrayList<Rectangle> matzColisao;
-	
+	private Boolean ativa;
 	private TelaInventario telaInventario;
-	private Som somBau;
+
 	private Timer timer;
 	private int qntInimigosMortos;
-	private ControleFases controleFases;
+	
 	private ControlePersonagem controlePersonagem;
 	
-	public ControleFase(TelaJogo telaJogo, Protagonista protagonista, TelaInventario telaInventario, ControleFases controleFases){
-		this.telaInventario = telaInventario;
+	
+	public ControleFase(TelaJogo telaJogo, Protagonista protagonista, TelaInventario telaInventario, String nome){
+		
+		
 		this.telaJogo = telaJogo;
-		this.somBau = new Som("sons/somBau.wav");
-		this.controleFases = controleFases;
 		this.protagonista = protagonista;
 		this.telaJogo.getPersonagens().add(protagonista);
 		this.personagens = telaJogo.getPersonagens();
-		
-		
-		this.telaJogo.setFocusable(true);
-		this.telaJogo.requestFocus(true);
+		this.protagonista.setTempo("0");
 		this.baus = telaJogo.getBaus();
+		
 		this.matzColisao = telaJogo.getMatzColisao();
 		
-		this.telaInventario.setQntBaus(0);
 		timer = new Timer(this.telaInventario, this.protagonista);
 		timer.start();
 		
+		
+	
 		ativarThread();
 		
 		this.telaJogo.setTelaAtiva(true);
 		
+		
 		this.controlePersonagem = new ControlePersonagem(this.protagonista, this.matzColisao, this.personagens);
-		this.telaJogo.addKeyListener(this.controlePersonagem);
+		this.telaJogo.addKeyListener(new ControleKeySingle(this.protagonista));
 		this.controlePersonagem.start();
 		
 		
 		
+		this.telaInventario = telaInventario;
 		this.telaInventario.add(this.protagonista.getLifeBar());
 		this.telaInventario.getLbNome().setText(this.protagonista.getNome());
 		this.telaInventario.getLbPontuacao().setText(this.protagonista.getPontuacao()+"");
 		this.telaInventario.setIiThumb(new ImageIcon(this.protagonista.getCaminhoTumb()));
+		this.telaInventario.setQntBaus(0);
+		this.telaInventario.getLbNomeFase().setText(nome);
+		
+		this.telaInventario.getTimer().setText("00:00");
 		
 		this.qntInimigosMortos = 0;
 		
@@ -76,7 +82,7 @@ public class ControleFase extends Thread{
 	
 	
 	
-
+	
 	
 	public void ativarThread(){
 		
@@ -105,7 +111,7 @@ public class ControleFase extends Thread{
 	
 	
 	public void responderQuestionario(Inimigo temp){
-		this.controlePersonagem.setDirecao(-1);
+		this.protagonista.setAction(-1);
 		int resposta = ShowMessage.activeInputDialog(temp.getTexto());
 		
 		Protagonista temp2  = (Protagonista) this.personagens.get(3);
@@ -124,13 +130,9 @@ public class ControleFase extends Thread{
 	
 	public void ativarBau(){
 		for (Bau bau : baus){
-			
-			
-			
-			this.controlePersonagem.setDirecao(-1);
-			
+		
 			if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== false){	
-					somBau.play();
+					bau.getSomBau().play();
 					bau.mostrarInformação();
 					bau.setWasActivated(true);
 					this.protagonista.setQntBausAbertos(this.protagonista.getQntBausAbertos()+1);
@@ -143,6 +145,7 @@ public class ControleFase extends Thread{
 			}	
 		}
 		this.protagonista.setIntersectBau(false);
+		this.protagonista.setAction(-1);
 	}
 	
 	public void verificarVidaPersonagens(){
@@ -182,21 +185,47 @@ public class ControleFase extends Thread{
 		
 	}
 	
+	public void faseAtiva(){
+		
+		if(this.qntInimigosMortos == 3){
+		
+			
+			desativarThread();
+		
+			this.controlePersonagem.stop();			
+			this.timer.stop();			
+			this.timer = null;
+			this.controlePersonagem = null;
+			System.gc();
+			
+			
+			this.protagonista.setAction(-1);
+			this.qntInimigosMortos = 0;
+			this.telaJogo.setTelaAtiva(false);
+			this.ativa = false;
+		}
+	}
+	
+	public void setarTimer(){
+		
+		this.telaInventario.getTimer().setText(protagonista.getTempo());
+		
+	}
+	
 	public void run(){
 			
 		while(true){
 			if(telaJogo.getTelaAtiva()){
 				verificarVidaPersonagens();
 				telaJogo.repaint();
-				
+				this.faseAtiva();
+				this.setarTimer();
 				if(this.protagonista.getIntersectBau()){
 					ativarBau();
 				}
-				
-				
-				
-				
-				
+			}
+			else{
+				break;
 			}
 		}
 		
@@ -206,6 +235,14 @@ public class ControleFase extends Thread{
 
 	public int getQntInimigosMortos() {
 		return qntInimigosMortos;
+	}
+
+
+
+
+
+	public Boolean getAtiva() {
+		return ativa;
 	}
 
 

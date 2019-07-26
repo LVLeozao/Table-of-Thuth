@@ -23,15 +23,14 @@ public class Camada{
 	private  int tileAltura;
 	ArrayList<Rectangle> bausColisao = new ArrayList<>();
 	
-	
-	
+
 	
 	public Camada(String tileImg, String arquivo, int mapaQtnColunas, int mapaQntLinhas, int tileLargura, int tileAltura) {
 		this.mapaQtnColunas = mapaQtnColunas;
 		this.mapaQntLinhas = mapaQntLinhas;
 		this.tileLargura = tileLargura;
 		this.tileAltura = tileAltura;
-		
+
 		this.mapa = new int[mapaQntLinhas][mapaQtnColunas];
 		this.mapa = carregaMatriz(mapa, arquivo);
 		try {
@@ -83,19 +82,20 @@ public class Camada{
 		int tileCol;
 		int colunasTileSet=tileSet.getWidth()/tileLargura;
 		
-		
+	
 		for (int i = 0; i < mapaQntLinhas  ; i++) {
 			for (int j = 0; j <mapaQtnColunas ; j++) {
 				
 				tile = (mapa[i][j] != 0) ? (mapa[i][j]-1) : 1;
 		
-	
+				
 				tileRow = (tile / (colunasTileSet)) | 0;
 				tileCol = (tile % (colunasTileSet)) | 0;
 				camada.getGraphics().drawImage(tileSet, (j * tileAltura), (i * tileLargura), (j * tileAltura) + tileAltura,
 						(i * tileLargura) + tileLargura, (tileCol * tileAltura), (tileRow * tileLargura),
 						(tileCol * tileAltura) + tileAltura, (tileRow * tileLargura) + tileLargura, null);
 			}
+			
 		}
 	
 		

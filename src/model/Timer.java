@@ -16,21 +16,23 @@ public class Timer extends Thread{
 		this.mm = 0;
 		this.ss = 0;
 		this.pausa = false;
+		this.protagonista.setTempo("");
 		
 	}
 	
 	public void run(){
 		while (true){
 			
-			this.inventario.requestFocus();
 			while(this.pausa == false){
+				
+				
 				if(ss == 60){
 					ss = 0;
 					mm+=1;
 				}
 				
 				this.protagonista.setTempo(mm+":"+ss);
-				this.inventario.getTimer().setText(mm+":"+ss);
+				
 				ss+=1;
 				
 				try {

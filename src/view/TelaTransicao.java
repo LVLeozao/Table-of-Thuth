@@ -13,15 +13,24 @@ import javax.swing.JPanel;
 import model.Som;
 
 public class TelaTransicao extends JPanel {
-	private JButton btnComecar, btnConfirmar, btnSair;
-	private JLabel lbNome, lbResultado, lbDerrota, lbPontuacao, lbPntBau, lbTempo;
+	private JButton btnConfirmar, btnSair;
+	private JLabel lbNome, lbPontuacao, lbTempo;
 	private Som somDerrota, somVitoria;
+	private JPanel panelLb;
 	private Boolean faseAtiva1, faseAtiva2, faseAtiva3, resultadoAtivo, morteAtiva, resultadoFinalAtivo, resultadoMultiplayer;
 	
 	public TelaTransicao(){
 		setLayout(null);
 		setSize(800, 704);
-		int font = 50;
+		int font = 60;
+		
+		
+		
+		this.panelLb = new JPanel();
+		this.panelLb.setBounds(0,0,1000,704);
+		this.panelLb.setLayout(null);
+		this.panelLb.setVisible(false);
+		
 		
 		
 		this.faseAtiva1 = false;
@@ -34,78 +43,66 @@ public class TelaTransicao extends JPanel {
 		this.resultadoMultiplayer = false;
 		
 	
-		this.btnConfirmar = new JButton(new ImageIcon("src/img/Confirmar.png"));
+		this.btnConfirmar = new JButton(new ImageIcon("src/img/botaoConfirmar.png"));
 		this.btnConfirmar.setContentAreaFilled(false);
-		this.btnConfirmar.setBorderPainted(false);
-		this.btnConfirmar.setBounds(380, 635, 50, 50);
+		this.btnConfirmar.setBounds(468, 704-85, 60, 64);
 		this.btnConfirmar.setToolTipText("Confirmar");
 		this.btnConfirmar.setVisible(false);
 		
-		this.btnComecar= new JButton("Começar");
-		this.btnComecar.setBounds(350, 635, 150, 45);
-		this.btnComecar.setVisible(false);
-		
-		this.btnSair= new JButton("Sair");
-		this.btnSair.setBounds(350, 635, 150, 45);
+		this.btnSair= new JButton(new ImageIcon("src/img/botaoSair.png"));
+		this.btnSair.setBounds(468, 704-85, 150, 45);
 		this.btnSair.setVisible(false);
+		this.btnSair.setToolTipText("Confirmar");
+		this.btnSair.setVisible(false);
+		this.btnSair.setContentAreaFilled(false);
 		
-		this.lbPontuacao = new JLabel("1000");
+		this.lbPontuacao = new JLabel("0");
 		this.lbPontuacao.setFont(new Font("TimesRoman", Font.BOLD, font));
-		this.lbPontuacao.setForeground(new Color(255,255,255));
-		this.lbPontuacao.setBounds(450, 85, 400, 400);
-		this.lbPontuacao.setVisible(false);
+		this.lbPontuacao.setForeground(new Color(0,0,0));
+		this.lbPontuacao.setBounds(537, 250, 400, 400);
 		
-		this.lbPntBau = new JLabel("-30");
-		this.lbPntBau.setFont(new Font("TimesRoman", Font.BOLD, font));
-		this.lbPntBau.setForeground(new Color(255,255,255));
-		this.lbPntBau.setBounds(450, 200, 400, 400);
-		this.lbPntBau.setVisible(false);
 		
 		this.lbTempo = new JLabel("00:00");
 		this.lbTempo.setFont(new Font("TimesRoman", Font.BOLD, font));
-		this.lbTempo.setForeground(new Color(255,255,255));
-		this.lbTempo.setBounds(450, 312, 400, 400);
-		this.lbTempo.setVisible(false);
+		this.lbTempo.setForeground(new Color(0,0,0));
+		this.lbTempo.setBounds(535, 140, 400, 400);
+		
 		
 		this.lbNome= new JLabel("");
 		this.lbNome.setFont(new Font("TimesRoman", Font.BOLD, font));
-		this.lbNome.setForeground(new Color(255,255,255));
-		this.lbNome.setBounds(580, 160, 400, 400);
+		this.lbNome.setForeground(new Color(0,0,0));
+		this.lbNome.setBounds(380, 50, 400, 400);
+		
+		
 		this.lbNome.setVisible(false);
-		
-		
-		
-		this.lbDerrota = new JLabel(new ImageIcon("src/img/YouDied.png"));
-		this.lbDerrota.setBounds(0,0,800,704);
-		this.lbDerrota.setVisible(false);
-		
+		this.lbPontuacao.setVisible(false);
+		this.lbTempo.setVisible(false);
+
 		somDerrota = new Som("sons/morreu.wav");
 		somVitoria = new Som("sons/vitoria.wav");
 		
 		add(lbPontuacao);
-		add(lbPntBau);
 		add(lbTempo);
 		add(lbNome);
 		add(btnConfirmar);
-		add(btnComecar);
 		add(btnSair);
+		
 	}
 
 	protected void paintComponent(Graphics g) {
 		if(this.faseAtiva1){
-			g.drawImage(new ImageIcon("src/img/Fase1.png").getImage(), 0, 0, this);
+			g.drawImage(new ImageIcon("src/img/And.png").getImage(), 0, 0, this);
 		}
 		else if(this.faseAtiva2){
-			g.drawImage(new ImageIcon("src/img/Fase2.png").getImage(), 0, 0, this);
+			g.drawImage(new ImageIcon("src/img/Or.png").getImage(), 0, 0, this);
 		}
 		else if(this.faseAtiva3){
-			g.drawImage(new ImageIcon("src/img/Fase3.png").getImage(), 0, 0, this);
+			g.drawImage(new ImageIcon("src/img/Not.png").getImage(), 0, 0, this);
 		}
-		else if(this.faseAtiva3){
-			g.drawImage(new ImageIcon("src/img/Fase3.png").getImage(), 0, 0, this);
-		}
-		else if(this.resultadoAtivo){System.out.println("ENTROU");
-			g.drawImage(new ImageIcon("src/img/TelaCompleta.png").getImage(), 0, 0, this);
+
+		else if(this.resultadoAtivo){
+			
+			g.drawImage(new ImageIcon("src/img/TelaResultado.png").getImage(), 0, 0, this);
 		}
 		
 		else if(this.morteAtiva){
@@ -124,6 +121,10 @@ public class TelaTransicao extends JPanel {
 	
 	
 	
+
+	public JPanel getPanelLb() {
+		return panelLb;
+	}
 
 	public Boolean getResultadoFinalAtivo() {
 		return resultadoFinalAtivo;
@@ -178,17 +179,7 @@ public class TelaTransicao extends JPanel {
 		return faseAtiva3;
 	}
 	
-	public JButton getBtnComecar() {
-		return btnComecar;
-	}
 
-	public JLabel getLbDerrota() {
-		return lbDerrota;
-	}
-
-	public JLabel getLbResultado() {
-		return lbResultado;
-	}
 
 	public Som getSomDerrota() {
 		return somDerrota;
@@ -206,13 +197,7 @@ public class TelaTransicao extends JPanel {
 		this.lbPontuacao = lbPontuacao;
 	}
 
-	public JLabel getLbPntBau() {
-		return lbPntBau;
-	}
-
-	public void setLbPntBau(JLabel lbPntBau) {
-		this.lbPntBau = lbPntBau;
-	}
+	
 
 	public JLabel getLbTempo() {
 		return lbTempo;

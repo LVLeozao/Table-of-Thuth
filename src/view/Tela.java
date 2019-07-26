@@ -16,19 +16,13 @@ import model.Protagonista;
 import model.XmlUsuario;
 
 public class Tela extends JFrame{
-	private JPanel panelGeral, panelJogavel, panelInventario;
-	private TelaAnd telaAnd; 
-	private TelaOr telaOr;	
-	private TelaNot telaNot;
-	private CardLayout cardGeral, cardJogavel, cardInventario;
+	private JPanel panelGeral;
+	
+	private CardLayout cardGeral;
 	private TelaConfiguracoes telaConfig;
-
-	private TelaPausa telaPausa;
 	private TelaAbertura telaAbertura;
 	private TelaInformacoes telaInformacoes;
 	private TelaSelecao telaSelecao;
-	private TelaInventario telaInventario;
-	private TelaTransicao telaTransicao;
 	private XmlUsuario xml;
 	private TelaInventarioMultiplayer telaInventarioMultiplayer;
 	private Multiplayer multiplayer;
@@ -41,49 +35,22 @@ public class Tela extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		this.cardGeral = new CardLayout();
-		this.cardJogavel = new CardLayout();
-		this.cardInventario = new CardLayout();
+		
 		
 		panelGeral = new JPanel();
 		panelGeral.setLayout(cardGeral);
 		panelGeral.setBounds(0, 0, 1000, 704);
 		
-		panelJogavel = new JPanel();
-		panelJogavel.setLayout(cardJogavel);
-		panelJogavel.setVisible(false);
-		panelJogavel.setBounds(0,0,800,704);
 		
-		panelInventario = new JPanel();
-		panelInventario.setLayout(cardInventario);
-		panelInventario.setVisible(false);
-		panelInventario.setBounds(800, 0, 200, 704);
-		
-		this.telaAnd = new TelaAnd();
-		this.telaOr = new TelaOr();
-		this.telaNot = new TelaNot();
 		this.multiplayer = new Multiplayer();
 		
 		
 		this.telaAbertura = new TelaAbertura();
 		this.telaInformacoes = new TelaInformacoes();
 		this.telaSelecao = new TelaSelecao();
-		this.telaInventario = new TelaInventario();
 		this.telaInventarioMultiplayer = new TelaInventarioMultiplayer();
-		this.telaPausa = new TelaPausa();
-		this.telaTransicao = new TelaTransicao();
-		
-		cardJogavel.addLayoutComponent(telaAnd, "1");
-		cardJogavel.addLayoutComponent(telaOr, "2");
-		cardJogavel.addLayoutComponent(telaNot, "3");
-		cardJogavel.addLayoutComponent(telaTransicao, "4");
-		cardJogavel.addLayoutComponent(multiplayer, "5");
 		
 		
-		panelJogavel.add(telaAnd);
-		panelJogavel.add(telaOr);
-		panelJogavel.add(telaNot);
-		panelJogavel.add(telaTransicao);
-		panelJogavel.add(multiplayer);
 		
 		
 		cardGeral.addLayoutComponent(this.telaAbertura, "1");
@@ -95,20 +62,16 @@ public class Tela extends JFrame{
 		panelGeral.add(telaSelecao);
 		
 		
-		cardInventario.addLayoutComponent(this.telaInventario, "1");
-		cardInventario.addLayoutComponent(this.telaPausa, "2");
-		cardInventario.addLayoutComponent(this.telaInventarioMultiplayer, "3");
-		panelInventario.add(telaInventario);
-		panelInventario.add(telaPausa);
-		panelInventario.add(telaInventarioMultiplayer);
+		
+		//cardInventario.addLayoutComponent(this.telaInventarioMultiplayer, "3");
+		
+		//panelInventario.add(telaInventarioMultiplayer);
 		
 		xml = new XmlUsuario();
 		
 		this.telaConfig = new TelaConfiguracoes();
 		
 		add(panelGeral);
-		add(panelInventario);
-		add(panelJogavel);
 		
 		cardGeral.show(panelGeral, "1");
 		
@@ -126,28 +89,6 @@ public class Tela extends JFrame{
 
 
 
-	public TelaPausa getTelaPausa() {
-		return telaPausa;
-	}
-
-
-
-	public TelaInventario getTelaInventario() {
-		return telaInventario;
-	}
-
-
-
-	public TelaAnd getTelaAnd() {
-		return telaAnd;
-	}
-
-
-
-	public TelaNot getTelaNot() {
-		return telaNot;
-	}
-
 
 
 	public TelaSelecao getTelaSelecao() {
@@ -161,38 +102,9 @@ public class Tela extends JFrame{
 
 
 
-	public JPanel getPanelJogavel() {
-		return panelJogavel;
-	}
-
-
-
-	public JPanel getPanelInventario() {
-		return panelInventario;
-	}
-
-
-
-	public TelaOr getTelaOr() {
-		return telaOr;
-	}
-
-
 
 	public CardLayout getCardGeral() {
 		return cardGeral;
-	}
-
-
-
-	public CardLayout getCardJogavel() {
-		return cardJogavel;
-	}
-
-
-
-	public CardLayout getCardInventario() {
-		return cardInventario;
 	}
 
 
@@ -201,62 +113,9 @@ public class Tela extends JFrame{
 		return telaAbertura;
 	}
 
-
-
 	public TelaInformacoes getTelaInformacoes() {
 		return telaInformacoes;
 	}
-
-
-
-
-	public void setTelaAnd(TelaAnd telaAnd) {
-		this.telaAnd = telaAnd;
-	}
-
-
-
-
-	public void setTelaOr(TelaOr telaOr) {
-		this.telaOr = telaOr;
-	}
-
-
-
-
-	public void setTelaNot(TelaNot telaNot) {
-		this.telaNot = telaNot;
-	}
-
-
-
-
-	public void setCardJogavel(CardLayout cardJogavel) {
-		this.cardJogavel = cardJogavel;
-	}
-
-
-
-
-	public void setCardInventario(CardLayout cardInventario) {
-		this.cardInventario = cardInventario;
-	}
-
-
-
-
-	public void setTelaInventario(TelaInventario telaInventario) {
-		this.telaInventario = telaInventario;
-	}
-
-
-
-
-	public TelaTransicao getTelaResultado() {
-		return telaTransicao;
-	}
-
-
 
 
 	public TelaInventarioMultiplayer getTelaInventarioMultiplayer() {

@@ -25,7 +25,9 @@ public class VerificarColisao {
 		for (Rectangle rectangle : matzColisao) {
 			
 			if(rectangle.getBounds().intersects(personagem.setBounds(posTempX, posTempY))) {
+			
 				return false;
+		
 			}
 		}
 		

@@ -13,16 +13,15 @@ import model.ThreadPoder;
 import model.VerificarColisao;
 
 
-public class ControlePersonagem extends Thread implements KeyListener {
+public class ControlePersonagem extends Thread{
 
 	private Protagonista protagonista;
 	private int up, down, left, right, direcaoPoder;
 	private ArrayList<Rectangle> matzColisao;
 	private ThreadPoder threadPoder;
 	private ArrayList<Personagem> personagens;
-	private int direcao = -1;
 	private int passos = 4;
-	private int tempoThreadMovimento = 25;
+	private int tempoThreadMovimento = 30;
 
 
 	public ControlePersonagem(Protagonista protagonista, ArrayList<Rectangle> matzColisao, ArrayList<Personagem> personagens) {
@@ -33,93 +32,10 @@ public class ControlePersonagem extends Thread implements KeyListener {
 		
 	}
 
-	public void keyPressed(KeyEvent e) {
-		
-		
-		if(e.getKeyCode() == this.protagonista.getDirecoes()[4]){
-			this.direcao = 0;
-		}
-			
-		
-		if (e.getKeyCode() == this.protagonista.getDirecoes()[0]) {
-			this.direcao = 1;
-		}
-
-		else if (e.getKeyCode() == this.protagonista.getDirecoes()[1]) {
-			
-			this.direcao = 2;
-
-		}
-
-		else if (e.getKeyCode() == this.protagonista.getDirecoes()[3]) {
-			this.direcao = 3;
-
-		}
-
-		else if (e.getKeyCode() == this.protagonista.getDirecoes()[2]) {
-			
-			this.direcao = 4;
-		}
-		
-		else if(e.getKeyCode() == this.protagonista.getDirecoes()[5]){
-			this.direcao = 5;
-			
-		}
-		
-		
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		this.direcao = -1;
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	
-	
 	public void run(){
 		while(true){
-			switch (direcao) {
+			switch (protagonista.getAction()) {
 				case 0:
-					
-					if (threadPoder == null || threadPoder.isAlive() == false) {
-						
-						protagonista.getPoder().setPosX(protagonista.getPosX());
-						protagonista.getPoder().setPosY(protagonista.getPosY());
-						
-						if (protagonista.getAparencia() == 0 || protagonista.getAparencia() == 4
-								|| protagonista.getAparencia() == 8) {
-							this.direcaoPoder = 0;
-						}
-
-						else if (protagonista.getAparencia() == 1 || protagonista.getAparencia() == 5
-								|| protagonista.getAparencia() == 9) {
-							this.direcaoPoder = 1;
-						}
-
-						if (protagonista.getAparencia() == 2 || protagonista.getAparencia() == 6
-								|| protagonista.getAparencia() == 10) {
-							this.direcaoPoder = 2;
-						}
-						if (protagonista.getAparencia() == 3 || protagonista.getAparencia() == 7
-								|| protagonista.getAparencia() == 11) {
-							this.direcaoPoder = 3;
-						}
-						
-						
-						threadPoder = new ThreadPoder(protagonista, this.direcaoPoder, matzColisao, personagens);
-						threadPoder.start();	
-						
-					}
-					break;
-				case 1:
 					
 					if(VerificarColisao.verificarColisao(protagonista.getPosX(), protagonista.getPosY() + passos, matzColisao, protagonista) &&
 				VerificarColisao.verificarColisaoPersonagens(protagonista, personagens)){
@@ -147,7 +63,7 @@ public class ControlePersonagem extends Thread implements KeyListener {
 					
 					break;
 				
-				case 2:
+				case 1:
 					if(VerificarColisao.verificarColisao(protagonista.getPosX(),
 							protagonista.getPosY() - passos, matzColisao, protagonista) &&
 							VerificarColisao.verificarColisaoPersonagens(protagonista, personagens)){
@@ -173,34 +89,9 @@ public class ControlePersonagem extends Thread implements KeyListener {
 					
 					
 					break;
-				case 3:
-					if(VerificarColisao.verificarColisao(protagonista.getPosX() - passos, protagonista.getPosY(), matzColisao, protagonista) &&
-							VerificarColisao.verificarColisaoPersonagens(protagonista, personagens)){
-						switch (left) {
-						case 0:
-							protagonista.setAparencia(1);
-							break;
-						case 1:
-							protagonista.setAparencia(5);
-							break;
-						case 2:
-							protagonista.setAparencia(9);
-							break;
-					}
-
-					if (left == 2) {
-						left = 0;
-					} else {
-						left += 1;
-					}
-					protagonista.setPosX(protagonista.getPosX() - passos);
-						
-					}
-					
-					
-					break;
 				
-				case 4:
+				
+				case 2:
 					
 					if(VerificarColisao
 							.verificarColisao(protagonista.getPosX() + passos, protagonista.getPosY(), matzColisao, protagonista) &&
@@ -230,10 +121,71 @@ public class ControlePersonagem extends Thread implements KeyListener {
 					}
 					
 					break;
-				
+					
+				case 3:
+					if(VerificarColisao.verificarColisao(protagonista.getPosX() - passos, protagonista.getPosY(), matzColisao, protagonista) &&
+							VerificarColisao.verificarColisaoPersonagens(protagonista, personagens)){
+						switch (left) {
+						case 0:
+							protagonista.setAparencia(1);
+							break;
+						case 1:
+							protagonista.setAparencia(5);
+							break;
+						case 2:
+							protagonista.setAparencia(9);
+							break;
+					}
+
+					if (left == 2) {
+						left = 0;
+					} else {
+						left += 1;
+					}
+					protagonista.setPosX(protagonista.getPosX() - passos);
+						
+					}
+					
+					
+					break;
+				case 4:
+					
+					if (threadPoder == null || threadPoder.isAlive() == false) {
+						
+						protagonista.getPoder().setPosX(protagonista.getPosX());
+						protagonista.getPoder().setPosY(protagonista.getPosY());
+						
+						if (protagonista.getAparencia() == 0 || protagonista.getAparencia() == 4
+								|| protagonista.getAparencia() == 8) {
+							this.direcaoPoder = 0;
+						}
+						
+						else if (protagonista.getAparencia() == 1 || protagonista.getAparencia() == 5
+								|| protagonista.getAparencia() == 9) {
+							this.direcaoPoder = 1;
+						}
+						
+						if (protagonista.getAparencia() == 2 || protagonista.getAparencia() == 6
+								|| protagonista.getAparencia() == 10) {
+							this.direcaoPoder = 2;
+						}
+						if (protagonista.getAparencia() == 3 || protagonista.getAparencia() == 7
+								|| protagonista.getAparencia() == 11) {
+							this.direcaoPoder = 3;
+						}
+						
+						
+						threadPoder = new ThreadPoder(protagonista, this.direcaoPoder, matzColisao, personagens);
+						threadPoder.start();	
+						
+					}
+					break;
+
 				case 5:
 					this.protagonista.setIntersectBau(true);
 					break;
+				
+				
 		}
 			
 			try {
@@ -253,12 +205,6 @@ public class ControlePersonagem extends Thread implements KeyListener {
 		this.tempoThreadMovimento = tempoThreadMovimento;
 	}
 
-	public int getDirecao() {
-		return direcao;
-	}
 
-	public void setDirecao(int direcao) {
-		this.direcao = direcao;
-	}
 
 }

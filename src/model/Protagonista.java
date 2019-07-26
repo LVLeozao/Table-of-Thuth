@@ -18,7 +18,7 @@ public class Protagonista extends Personagem {
 	private boolean morto = false;
 	private ArrayList<String> tempoFases;
 	private int direcoes[];
-	private int sentido=-1;
+	private int action=-1;
 	
 	
 	
@@ -41,7 +41,7 @@ public class Protagonista extends Personagem {
 			this.direcoes[0] = KeyEvent.VK_DOWN;
 			this.direcoes[1] = KeyEvent.VK_UP;
 			this.direcoes[2] = KeyEvent.VK_RIGHT;
-			this.direcoes[3] = KeyEvent.VK_LEFT;
+			this.direcoes[3] = KeyEvent.VK_LEFT; // esquerda
 			this.direcoes[4] = KeyEvent.VK_N; // Soltar poder
 			this.direcoes[5] = KeyEvent.VK_M; // ativar baú
 			
@@ -66,6 +66,22 @@ public class Protagonista extends Personagem {
 	
 	
 	
+	public int getAction() {
+		return action;
+	}
+
+
+
+
+
+	public void setAction(int action) {
+		this.action = action;
+	}
+
+
+
+
+
 	public int[] getDirecoes() {
 		return direcoes;
 	}

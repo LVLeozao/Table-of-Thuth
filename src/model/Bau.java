@@ -10,6 +10,7 @@ public class Bau {
 	private Rectangle rectangle;
 	private String texto;
 	private Boolean wasActivated;
+	private Som somBau;
 	
 	
 	
@@ -17,8 +18,15 @@ public class Bau {
 		this.rectangle = rectangle;
 		this.texto = texto;
 		this.wasActivated = false;
+		this.somBau = new Som("sons/somBau.wav");
 		
 	}
+
+	
+	public Som getSomBau() {
+		return somBau;
+	}
+
 
 	public void mostrarInformação(){
 		ShowMessage.showText(this.texto);

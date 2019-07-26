@@ -184,77 +184,7 @@ public class ControleFases extends Thread {
 	}
 	
 		
-	public void trocarFase(){
-		
-		this.tela.setFocusable(false);
-		this.tela.getTelaInventario().setFocusable(false);
-		switch (numeroFase) {
-			
-		
-		
-		
-		case 1:
-				this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
-				this.tela.getTelaInventario().getLbNomeFase().setText("AND");
-
-				this.controleFase = new ControleFase(this.tela.getTelaAnd(), this.protagonista, this.tela.getTelaInventario(), this);
-				this.controleFase.start();
-				
-				this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"1");
-				
-				this.tela.getTelaAnd().setFocusable(true);
-				this.tela.getTelaAnd().requestFocus();
-				
-				
-				break;
-			case 2:
-				
-				this.protagonista.setPosX(352);
-				this.protagonista.setPosY(576);
-				
-				
-				
-				this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
-				this.tela.getTelaInventario().getLbNomeFase().setText("OR");
-				
-				this.controleFase = new ControleFase(this.tela.getTelaOr(), this.protagonista, this.tela.getTelaInventario(), this);
-				this.controleFase.start();
-				
-				this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"2");
 	
-				
-				this.tela.getTelaOr().setFocusable(true);
-				this.tela.getTelaOr().requestFocus();
-				
-				
-				break;
-				
-			case 3:
-				
-				this.protagonista.setPosX(256);
-				this.protagonista.setPosY(608);
-				
-				
-				
-				this.tela.getCardInventario().show(this.tela.getPanelInventario(), "1");
-				this.tela.getTelaInventario().getLbNomeFase().setText("NOT");
-				
-				this.controleFase = new ControleFase(this.tela.getTelaNot(), this.protagonista, this.tela.getTelaInventario(), this);
-				this.controleFase.start();
-				
-				this.tela.getCardJogavel().show(this.tela.getPanelJogavel(),"3");
-				
-				
-				this.tela.getTelaNot().setFocusable(true);
-				this.tela.getTelaNot().requestFocus();
-				
-				
-				break;
-			}
-		
-		
-		
-	}
 	
 	
 	

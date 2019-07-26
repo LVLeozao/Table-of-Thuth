@@ -37,11 +37,9 @@ public class ControleMultiplayer extends Thread{
 		
 		
 		
-		
-		
-		this.multiplayer.addKeyListener(this.multiplayer.getControlePlayer1());
+		this.multiplayer.addKeyListener(new ControleKeyMulti(this.multiplayer.getPlayer1(), this.multiplayer.getPlayer2()));
+	
 		this.multiplayer.getControlePlayer1().start();
-		this.multiplayer.addKeyListener(this.multiplayer.getControlePlayer2());
 		this.multiplayer.getControlePlayer2().start();
 		
 		

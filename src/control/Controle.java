@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import model.Protagonista;
+import view.SinglePlayer;
 import view.Tela;
 import view.TelaAbertura;
 import view.TelaAnd;
@@ -27,7 +28,7 @@ public class Controle implements ActionListener, MouseListener {
 	private TelaInventario telaInventario;
 	private TelaPausa telaPausa;
 	private TelaSelecao telaSelecao;
-	private ControleFases controleFases;
+	//private ControleFases controleFases;
 	private Protagonista protagonista;
 	
 	public Controle(Tela tela){
@@ -35,8 +36,6 @@ public class Controle implements ActionListener, MouseListener {
 		this.telaAbertura = tela.getTelaAbertura();
 		this.telaInformacoes = tela.getTelaInformacoes();
 		this.telaSelecao = tela.getTelaSelecao();
-		this.telaInventario = tela.getTelaInventario();
-		this.telaPausa = tela.getTelaPausa();
 		ativar();
 	
 	}
@@ -56,22 +55,17 @@ public class Controle implements ActionListener, MouseListener {
 		this.telaSelecao.getLbFeminino().addMouseListener(this);
 		this.telaSelecao.getLbMasculino().addMouseListener(this);
 		
-		this.telaInventario.getBtnPausar().addActionListener(this);
+		//this.telaInventario.getBtnPausar().addActionListener(this);
 		
 	
-		this.telaPausa.getBtnVoltar().addActionListener(this);
+		/*this.telaPausa.getBtnVoltar().addActionListener(this);
 		this.telaPausa.getBtnSair().addActionListener(this);
 		this.telaPausa.getBtnConfiguracao().addActionListener(this);
-		this.tela.getTelaResultado().getBtnConfirmar().addActionListener(this);
-		this.tela.getTelaResultado().getBtnComecar().addActionListener(this);
-		this.tela.getTelaResultado().getBtnSair().addActionListener(this);
+		*/
 		
-		this.tela.getTelaConfig().getBtnVoltar().addActionListener(this);
+		/*this.tela.getTelaConfig().getBtnVoltar().addActionListener(this);*/
 		
-		//this.tela.getTelaInventarioMultiplayer().getBtnPausar().addActionListener(this);
-		
-		
-		
+	
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -83,7 +77,7 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getTelaConfig().setVisible(false);
 		}
 		
-		else if(e.getSource() == this.tela.getTelaInventarioMultiplayer().getBtnPausar()){
+		/*else if(e.getSource() == this.tela.getTelaInventarioMultiplayer().getBtnPausar()){
 			this.tela.getCardInventario().show(this.tela.getPanelInventario(), "2");
 			this.tela.getMultiplayer().setFocusable(false);
 		}
@@ -103,7 +97,7 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getMultiplayer().requestFocus(true);
 			
 			
-		}
+		}*/
 		else if(e.getSource() == this.tela.getTelaInformacoes().getBtnControle()){
 			this.telaInformacoes.getLbControle().setVisible(true);
 			this.telaInformacoes.getLbSobre().setVisible(false);
@@ -175,9 +169,17 @@ public class Controle implements ActionListener, MouseListener {
 					}
 					
 					
-					this.controleFases = new ControleFases(tela, this.protagonista);
-					this.controleFases.start();
+					this.tela.getPanelGeral().setVisible(false);
 					
+					SinglePlayer single = new SinglePlayer(this.tela);
+					
+					ControleSinglePlayer controleSingle = new ControleSinglePlayer(single, this.protagonista);
+					
+					controleSingle.start();
+					
+				/*	this.controleFases = new ControleFases(tela, this.protagonista);
+					this.controleFases.start();
+				*/	
 					this.telaSelecao.setSelecionado("");
 					this.telaSelecao.getLbInfo().setText("");
 					this.telaSelecao.getTfNome().setText("");
@@ -187,15 +189,15 @@ public class Controle implements ActionListener, MouseListener {
 			}
 		}
 		
-		else if(e.getSource() == this.tela.getTelaPausa().getBtnSair()){
+		/*else if(e.getSource() == this.tela.getTelaPausa().getBtnSair()){
 				
 			this.parar();
 			
 			this.tela.getMultiplayer().setFocusable(false);
 		
-		}
+		}*/
 		
-		else if(e.getSource() == this.tela.getTelaResultado().getBtnComecar()){
+		/*else if(e.getSource() == this.tela.getTelaResultado().getBtnComecar()){
 			this.tela.getTelaResultado().setFocusable(false);
 			this.controleFases.trocarFase();
 			
@@ -226,7 +228,7 @@ public class Controle implements ActionListener, MouseListener {
 		
 		else if(e.getSource() == this.tela.getTelaResultado().getBtnSair()){
 			this.parar();
-		}
+		}*/
 	}
 
 	@Override
@@ -251,7 +253,7 @@ public class Controle implements ActionListener, MouseListener {
 		
 	}
 	
-	public void parar(){
+	/*public void parar(){
 		//Parando
 		this.tela.getPanelInventario().setVisible(false);
 		this.tela.getPanelJogavel().setVisible(false);
@@ -318,7 +320,7 @@ public class Controle implements ActionListener, MouseListener {
 		
 		
 
-	}
+	}*/
 
 	@Override
 	public void mouseEntered(MouseEvent e) {

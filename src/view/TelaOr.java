@@ -26,6 +26,8 @@ public class TelaOr extends TelaJogo{
 		getBaus().get(1).setTexto("Operação lógica(Disjunção).");
 		getBaus().get(2).setTexto("Simbolo (v)");
 		
+		
+		
 	}
 	
 	

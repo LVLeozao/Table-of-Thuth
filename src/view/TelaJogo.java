@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -26,7 +27,7 @@ public abstract class TelaJogo extends JPanel {
 	private ArrayList<Personagem> personagens;
 
 	private Inimigo inimigo1, inimigo2, inimigo3;
-	private Protagonista protagonista;
+	//private Protagonista protagonista;
 
 	private Boolean telaAtiva;
 
@@ -34,6 +35,7 @@ public abstract class TelaJogo extends JPanel {
 	private String arquivoCamada1, arquivoCamada2, arquivoCamada3;
 
 	private String imgInimigo, poderImagemInimigo;
+	private Boolean faseAtiva1, faseAtiva2, faseAtiva3;
 
 	public TelaJogo(String camadaTile1, String camadaTile2, String camadaTile3, String arquivoCamada1,
 			String arquivoCamada2, String arquivoCamada3, String imgInimigo, String poderImagemInimigo) {
@@ -60,6 +62,14 @@ public abstract class TelaJogo extends JPanel {
 		matzColisao = camada2.montarColisao();
 		matzColisaoBaus = camada2.getBausColisao();
 
+		
+		this.faseAtiva1 = false;
+		this.faseAtiva2 = false;
+		this.faseAtiva3 = false;
+		
+		
+		
+		
 		camada3 = new Camada(this.camadaTile3, this.arquivoCamada3, 25, 22, 32, 32);
 		camada3.montarMapa(800, 704);
 		
@@ -117,7 +127,8 @@ public abstract class TelaJogo extends JPanel {
 		g.drawImage(camada1.camada, 0, 0, this);
 		g.drawImage(camada2.camada, 0, 0, this);
 		g.drawImage(camada3.camada, 0, 0, this);
-
+		
+		
 		for (Personagem personagem : personagens) {
 			if (personagem.isCondicaoExistencia()) {
 				g.drawImage(personagem.getSprites()[personagem.getAparencia()], personagem.getPosX(),
@@ -134,8 +145,54 @@ public abstract class TelaJogo extends JPanel {
 				
 
 		}
+		
+		if(this.faseAtiva1){
+			g.drawImage(new ImageIcon("src/img/And.png").getImage(), 0, 0, this);
+		}
+		else if(this.faseAtiva2){
+			g.drawImage(new ImageIcon("src/img/Or.png").getImage(), 0, 0, this);
+		}
+		else if(this.faseAtiva3){
+			g.drawImage(new ImageIcon("src/img/Not.png").getImage(), 0, 0, this);
+		}
 
 	}
+
+	public Boolean getFaseAtiva1() {
+		return faseAtiva1;
+	}
+
+
+
+	public void setFaseAtiva1(Boolean faseAtiva1) {
+		this.faseAtiva1 = faseAtiva1;
+	}
+
+
+
+	public Boolean getFaseAtiva2() {
+		return faseAtiva2;
+	}
+
+
+
+	public void setFaseAtiva2(Boolean faseAtiva2) {
+		this.faseAtiva2 = faseAtiva2;
+	}
+
+
+
+	public Boolean getFaseAtiva3() {
+		return faseAtiva3;
+	}
+
+
+
+	public void setFaseAtiva3(Boolean faseAtiva3) {
+		this.faseAtiva3 = faseAtiva3;
+	}
+
+
 
 	public void setImgInimigo(String imgInimigo) {
 		this.imgInimigo = imgInimigo;
@@ -217,13 +274,7 @@ public abstract class TelaJogo extends JPanel {
 		this.camada3 = camada3;
 	}
 
-	public Protagonista getProtagonista() {
-		return protagonista;
-	}
 
-	public void setProtagonista(Protagonista protagonista) {
-		this.protagonista = protagonista;
-	}
 
 	public Boolean getTelaAtiva() {
 		return telaAtiva;

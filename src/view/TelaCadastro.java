@@ -123,8 +123,47 @@ public class TelaCadastro extends JFrame{
 		
 		setVisible(true);
 	}
-	
-	public static void main(String[] args) {
-		new TelaCadastro();
+
+	public JTextField getTfEnunciado() {
+		return tfEnunciado;
 	}
+
+	public JTextField getTfResposta() {
+		return tfResposta;
+	}
+
+	public JTextField getTfTag() {
+		return tfTag;
+	}
+
+	public JTextField getTfIdentificador() {
+		return tfIdentificador;
+	}
+
+	public JButton getBtnCadastrar() {
+		return btnCadastrar;
+	}
+
+	public JButton getBtnRemover() {
+		return btnRemover;
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
+	}
+
+	public JPanel getPanelAdd() {
+		return panelAdd;
+	}
+
+	public JRadioButton getRbCadastrar() {
+		return rbCadastrar;
+	}
+
+	public JRadioButton getRbRemover() {
+		return rbRemover;
+	}
+	
+	
+	
 }
