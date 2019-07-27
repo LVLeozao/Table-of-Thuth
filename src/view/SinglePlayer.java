@@ -60,7 +60,6 @@ public class SinglePlayer{
 		panelJogavel.add(telaAnd);
 		panelJogavel.add(telaOr);
 		panelJogavel.add(telaNot);
-		panelJogavel.add(telaTransicao);
 
 		panelInventario.add(telaInventario);
 		panelInventario.add(telaPausa);

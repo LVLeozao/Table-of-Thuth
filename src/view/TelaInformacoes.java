@@ -73,7 +73,7 @@ public class TelaInformacoes extends JPanel{
 		lbSobre = new JLabel(new ImageIcon("src/img/Sobre.png"));
 		lbSobre.setBounds(0, 0, 1000, 704);
 		
-		lbControle = new JLabel(new ImageIcon("src/img/Controles2.png"));
+		lbControle = new JLabel(new ImageIcon("src/img/Controles.png"));
 		lbControle.setBounds(230,130, 568, 500);
 		lbControle.setVisible(false);
 		

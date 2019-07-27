@@ -22,6 +22,7 @@ public class TelaNot extends TelaJogo{
 		getBaus().get(1).setTexto("Operação lógica(Negação)");
 		getBaus().get(2).setTexto("Simbolo (~)");
 		
+	
 	}
 
 }

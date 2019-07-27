@@ -3,21 +3,29 @@ package control;
 import javax.swing.ImageIcon;
 
 import view.SinglePlayer;
+import view.TelaAnd;
 import view.TelaJogo;
+import view.TelaNot;
+import view.TelaOr;
 
 public class ThreadTransicao extends Thread{
-	private SinglePlayer teste;
+	private TelaAnd telaAnd;
+	private TelaOr telaOr;
+	private TelaNot telaNot;
+	private SinglePlayer single;
 	
-	
-	
-	public ThreadTransicao(SinglePlayer teste) {
+	public ThreadTransicao(SinglePlayer single) {
 		super();
-		this.teste = teste;
+		this.single = single;
+		this.telaAnd = single.getTelaAnd();
+		this.telaOr = single.getTelaOr();
+		this.telaNot = single.getTelaNot();
+		
 	}
 
-	public void sleep(){
+	public void sleep(int tempo){
 		try {
-			Thread.sleep(2500);
+			Thread.sleep(tempo);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -27,19 +35,25 @@ public class ThreadTransicao extends Thread{
 
 	public void run(){
 		while(true){
-			if(this.teste.getTelaAnd().getFaseAtiva1()){
-				sleep();
-				this.teste.getTelaAnd().setFaseAtiva1(false);
+			
+		
+	
+			if(this.telaAnd.getFaseAtiva1()){
+				sleep(2500);
+				this.telaAnd.setFaseAtiva1(false);
 			}
-			else if(this.teste.getTelaOr().getFaseAtiva2()){
-				sleep();
-				this.teste.getTelaOr().setFaseAtiva2(false);
+			if(this.telaOr.getFaseAtiva2()){
+				sleep(2500);
+				this.telaOr.setFaseAtiva2(false);
 			}
-			else if(this.teste.getTelaNot().getFaseAtiva3()){
-				sleep();
-				this.teste.getTelaNot().setFaseAtiva3(false);
+			if(this.telaNot.getFaseAtiva3()){
+				sleep(2500);
+				this.telaNot.setFaseAtiva3(false);
 				break;
 			}
+			
+			sleep(1);
+			
 		}
 	}
 }

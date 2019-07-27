@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import javax.swing.JProgressBar;
 
@@ -16,6 +17,7 @@ public abstract class Personagem extends Sprite{
 	private Poder poder;
 	private JProgressBar lifeBar;
 	private Rectangle rectangle;
+	private ArrayList<String>tempos;
 
 	
 	
@@ -32,6 +34,7 @@ public abstract class Personagem extends Sprite{
 		
 		rectangle = new Rectangle(posX, posY, 32, 32);
 		
+		tempos = new ArrayList<String>();
 		
 		ativar();
 		
@@ -47,10 +50,13 @@ public abstract class Personagem extends Sprite{
 		lifeBar.setForeground(new Color(219, 37, 37));
 		lifeBar.setBorderPainted(false);
 		lifeBar.setToolTipText("Pontos de Vida");
-	
 	}
 	
 	
+	public ArrayList<String> getTempos() {
+		return tempos;
+	}
+
 	public JProgressBar getLifeBar() {
 		return lifeBar;
 	}

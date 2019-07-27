@@ -24,8 +24,6 @@ public class Timer extends Thread{
 		while (true){
 			
 			while(this.pausa == false){
-				
-				
 				if(ss == 60){
 					ss = 0;
 					mm+=1;
@@ -40,8 +38,14 @@ public class Timer extends Thread{
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				
 			}
+				
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
 		}
 			
 		

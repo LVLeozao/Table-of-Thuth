@@ -14,6 +14,7 @@ public class TelaPausa extends JPanel{
 	private JButton btnSair;
 	private ImageIcon iiVoltar, iiSair, iiConfig, iiBackground;
 	private JLabel lbBg;
+	private TelaConfiguracoes telaConfiguracoes;
 	
 	public TelaPausa(){
 
@@ -26,6 +27,7 @@ public class TelaPausa extends JPanel{
 		lbBg = new JLabel(new ImageIcon("src/img/PauseBackground.png"));
 		lbBg.setBounds(0, 0, 200, 704);
 	
+		this.telaConfiguracoes = new TelaConfiguracoes();
 		
 		btnVoltar = new JButton(iiVoltar);
 		btnVoltar.setContentAreaFilled(false);
@@ -51,7 +53,7 @@ public class TelaPausa extends JPanel{
 		add(btnSair);
 		add(lbBg);
 	
-		//requestFocus();
+
 
 
 	}
@@ -71,6 +73,13 @@ public class TelaPausa extends JPanel{
 	public JButton getBtnSair() {
 		return btnSair;
 	}
+
+
+
+	public TelaConfiguracoes getTelaConfiguracoes() {
+		return telaConfiguracoes;
+	}
+	
 	
 	
 	

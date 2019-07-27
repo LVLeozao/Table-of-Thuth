@@ -37,7 +37,13 @@ public class ControleKeySingle implements KeyListener{
 	
 	
 	public void keyReleased(KeyEvent e) {
-		p1.setAction(-1);
+
+		for (int i = 0; i <= 4; i++) {
+			if(e.getKeyCode() == p1.getDirecoes()[i] && i == p1.getAction()){
+				p1.setAction(-1);
+			}
+		}
+
 	}
 
 	

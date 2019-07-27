@@ -21,6 +21,7 @@ public class ThreadInimigo extends Thread{
 	private ThreadPoder threadPoder;
 	private ArrayList<Personagem> personagens;
 	private ControleInimigo controleInimigo;
+	private int speed = 400;
 	
 	
 	public ThreadInimigo(Personagem inimigo, ArrayList<Personagem> personagens, ArrayList<Rectangle> matzColisao) {
@@ -44,7 +45,7 @@ public class ThreadInimigo extends Thread{
 				int direcao = random.nextInt(5);
 				
 				controleInimigo.action(direcao);
-				Thread.sleep(500);
+				Thread.sleep(this.speed);
 			} catch (InterruptedException e) {
 				
 				e.printStackTrace();
@@ -57,4 +58,15 @@ public class ThreadInimigo extends Thread{
 		
 	}
 
+
+	public int getSpeed() {
+		return speed;
+	}
+
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	
 }

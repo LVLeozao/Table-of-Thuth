@@ -2,13 +2,16 @@ package control;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import model.Bau;
-
+import model.Destroy;
+import model.GerarPosicao;
 import model.Inimigo;
+import model.Itens;
 import model.Personagem;
 import model.Protagonista;
 import model.Som;
@@ -32,7 +35,7 @@ public class ControleFase extends Thread{
 
 	private Timer timer;
 	private int qntInimigosMortos;
-	
+	private Itens itens;
 	private ControlePersonagem controlePersonagem;
 	
 	
@@ -45,14 +48,15 @@ public class ControleFase extends Thread{
 		this.personagens = telaJogo.getPersonagens();
 		this.protagonista.setTempo("0");
 		this.baus = telaJogo.getBaus();
-		
+		this.itens = telaJogo.getItens();
 		this.matzColisao = telaJogo.getMatzColisao();
 		
+		
+		this.itens.setAtivo(true);
+	
 		timer = new Timer(this.telaInventario, this.protagonista);
 		timer.start();
-		
-		
-	
+
 		ativarThread();
 		
 		this.telaJogo.setTelaAtiva(true);
@@ -76,11 +80,54 @@ public class ControleFase extends Thread{
 		
 		this.qntInimigosMortos = 0;
 		
+		
+		
 
 		
 	}
 	
+	public void intersectItem(){
+		
+		if(this.protagonista.getBounds().intersects(this.itens.getBounds())){
+			action(this.protagonista, this.controlePersonagem);
+		}
+	}
 	
+	
+	public void action(Protagonista protagonista, ControlePersonagem control){
+
+
+		switch (this.itens.getAparencia()) {
+		
+			case 0:	
+				
+				this.thread1.setSpeed(5000);
+				this.thread2.setSpeed(5000);
+				this.thread3.setSpeed(5000);
+				break;
+	
+			case 1:
+				protagonista.setQntVida(protagonista.getQntVida()+1000);
+				break;
+			
+			case 2:
+				control.setTempoThreadMovimento(control.getTempoThreadMovimento()+3);
+				break;
+			case 3:
+				protagonista.getPoder().setDano(protagonista.getPoder().getDano()+500);
+				break;
+			
+		}
+		
+		int [] a =  GerarPosicao.gerarPosicaoXY(this.telaJogo.getMatzColisao(), this.telaJogo.getCamada2().mapa);
+		
+		this.itens.setPosX(a[0]);
+		this.itens.setPosY(a[1]);
+		
+		this.itens.setAparencia(new Random().nextInt(4));
+		
+		
+	}
 	
 	
 	
@@ -129,23 +176,29 @@ public class ControleFase extends Thread{
 	}
 	
 	public void ativarBau(){
+		
 		for (Bau bau : baus){
 		
 			if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== false){	
+					this.protagonista.setAction(-1);
 					bau.getSomBau().play();
 					bau.mostrarInformação();
 					bau.setWasActivated(true);
 					this.protagonista.setQntBausAbertos(this.protagonista.getQntBausAbertos()+1);
-					this.telaInventario.setQntBaus(this.protagonista.getQntBausAbertos());
+					this.telaInventario.setQntBaus(this.telaInventario.getQntBaus()+1);
+					this.protagonista.setPontuacao(this.protagonista.getPontuacao()-10);
+					this.telaInventario.getLbPontuacao().setText(this.protagonista.getPontuacao()+"");
+					
+					
 					
 					
 			}
 			else if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== true){
+				this.protagonista.setAction(-1);
 				ShowMessage.showText("Báu já foi ativado!");
 			}	
 		}
 		this.protagonista.setIntersectBau(false);
-		this.protagonista.setAction(-1);
 	}
 	
 	public void verificarVidaPersonagens(){
@@ -167,6 +220,7 @@ public class ControleFase extends Thread{
 					}
 					
 					else if(personagem instanceof Protagonista){
+						
 						this.protagonista.setMorto(true);
 					}
 					
@@ -185,20 +239,22 @@ public class ControleFase extends Thread{
 		
 	}
 	
+	public void matarControle(){
+		desativarThread();
+		this.controlePersonagem.stop();			
+		this.timer.stop();
+		this.timer = null;
+		this.controlePersonagem = null;
+		this.telaJogo.setTelaAtiva(false);
+		System.gc();
+	}
+	
 	public void faseAtiva(){
 		
 		if(this.qntInimigosMortos == 3){
+			matarControle();
 		
-			
-			desativarThread();
 		
-			this.controlePersonagem.stop();			
-			this.timer.stop();			
-			this.timer = null;
-			this.controlePersonagem = null;
-			System.gc();
-			
-			
 			this.protagonista.setAction(-1);
 			this.qntInimigosMortos = 0;
 			this.telaJogo.setTelaAtiva(false);
@@ -220,6 +276,7 @@ public class ControleFase extends Thread{
 				telaJogo.repaint();
 				this.faseAtiva();
 				this.setarTimer();
+				this.intersectItem();
 				if(this.protagonista.getIntersectBau()){
 					ativarBau();
 				}

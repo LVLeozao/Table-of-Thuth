@@ -17,25 +17,17 @@ public class TelaTransicao extends JPanel {
 	private JLabel lbNome, lbPontuacao, lbTempo;
 	private Som somDerrota, somVitoria;
 	private JPanel panelLb;
-	private Boolean faseAtiva1, faseAtiva2, faseAtiva3, resultadoAtivo, morteAtiva, resultadoFinalAtivo, resultadoMultiplayer;
+	private Boolean resultadoAtivo, morteAtiva, resultadoFinalAtivo, resultadoMultiplayer;
 	
 	public TelaTransicao(){
 		setLayout(null);
 		setSize(800, 704);
 		int font = 60;
 		
-		
-		
 		this.panelLb = new JPanel();
 		this.panelLb.setBounds(0,0,1000,704);
 		this.panelLb.setLayout(null);
 		this.panelLb.setVisible(false);
-		
-		
-		
-		this.faseAtiva1 = false;
-		this.faseAtiva2 = false;
-		this.faseAtiva3 = false;
 		
 		this.resultadoAtivo = false;
 		this.morteAtiva = false;
@@ -50,7 +42,7 @@ public class TelaTransicao extends JPanel {
 		this.btnConfirmar.setVisible(false);
 		
 		this.btnSair= new JButton(new ImageIcon("src/img/botaoSair.png"));
-		this.btnSair.setBounds(468, 704-85, 150, 45);
+		this.btnSair.setBounds(468, 704-85, 60, 64);
 		this.btnSair.setVisible(false);
 		this.btnSair.setToolTipText("Confirmar");
 		this.btnSair.setVisible(false);
@@ -90,18 +82,7 @@ public class TelaTransicao extends JPanel {
 	}
 
 	protected void paintComponent(Graphics g) {
-		if(this.faseAtiva1){
-			g.drawImage(new ImageIcon("src/img/And.png").getImage(), 0, 0, this);
-		}
-		else if(this.faseAtiva2){
-			g.drawImage(new ImageIcon("src/img/Or.png").getImage(), 0, 0, this);
-		}
-		else if(this.faseAtiva3){
-			g.drawImage(new ImageIcon("src/img/Not.png").getImage(), 0, 0, this);
-		}
-
-		else if(this.resultadoAtivo){
-			
+		if(this.resultadoAtivo){
 			g.drawImage(new ImageIcon("src/img/TelaResultado.png").getImage(), 0, 0, this);
 		}
 		
@@ -110,7 +91,7 @@ public class TelaTransicao extends JPanel {
 		}
 		
 		else if(this.resultadoFinalAtivo){
-			g.drawImage(new ImageIcon("src/img/TelaFinal.png").getImage(), 0, 0, this);
+			g.drawImage(new ImageIcon("src/img/TelaZerou.png").getImage(), 0, 0, this);
 		}
 		
 		else if(this.morteAtiva){
@@ -160,26 +141,6 @@ public class TelaTransicao extends JPanel {
 	public Boolean getResultadoAtivo() {
 		return resultadoAtivo;
 	}
-	public void setFaseAtiva1(Boolean faseAtiva1) {
-		this.faseAtiva1 = faseAtiva1;
-	}
-	public void setFaseAtiva2(Boolean faseAtiva2) {
-		this.faseAtiva2 = faseAtiva2;
-	}
-	public void setFaseAtiva3(Boolean faseAtiva3) {
-		this.faseAtiva3 = faseAtiva3;
-	}
-	public Boolean getFaseAtiva1() {
-		return faseAtiva1;
-	}
-	public Boolean getFaseAtiva2() {
-		return faseAtiva2;
-	}
-	public Boolean getFaseAtiva3() {
-		return faseAtiva3;
-	}
-	
-
 
 	public Som getSomDerrota() {
 		return somDerrota;

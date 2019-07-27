@@ -38,13 +38,13 @@
         </java.beans.PropertyChangeSupport>
       </changeSupport>
       <font class="javax.swing.plaf.FontUIResource">
-        <weight class="float">2.0</weight>
-        <width class="null"/>
         <size class="null"/>
+        <family class="tempoFases">Dialog</family>
         <transform class="null"/>
         <posture class="null"/>
-        <family class="tempoFases">Dialog</family>
+        <width class="null"/>
         <superscript class="null"/>
+        <weight class="float">2.0</weight>
         <tracking class="null"/>
       </font>
       <foreground class="javax.swing.plaf.ColorUIResource">
@@ -116,7 +116,7 @@
   <model.Sprite>
     <default>
       <altura>32</altura>
-      <aparencia>5</aparencia>
+      <aparencia>6</aparencia>
       <colunas>3</colunas>
       <largura>32</largura>
       <linhas>4</linhas>
@@ -544,7 +544,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475957792</pData>
+              <pData>1466783648</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType>
@@ -608,7 +608,7 @@
                     </next>
                   </compositeType>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053344</pNativePrim>
+                  <pNativePrim>8791158946272</pNativePrim>
                 </drawLineLoop>
                 <fillRectLoop>
                   <methodSignature>FillRect(...)</methodSignature>
@@ -616,7 +616,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053120</pNativePrim>
+                  <pNativePrim>8791158946048</pNativePrim>
                 </fillRectLoop>
                 <drawRectLoop>
                   <methodSignature>DrawRect(...)</methodSignature>
@@ -624,7 +624,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053400</pNativePrim>
+                  <pNativePrim>8791158946328</pNativePrim>
                 </drawRectLoop>
                 <drawPolygonsLoop>
                   <methodSignature>DrawPolygons(...)</methodSignature>
@@ -632,7 +632,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053456</pNativePrim>
+                  <pNativePrim>8791158946384</pNativePrim>
                 </drawPolygonsLoop>
                 <drawPathLoop>
                   <methodSignature>DrawPath(...)</methodSignature>
@@ -640,7 +640,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053512</pNativePrim>
+                  <pNativePrim>8791158946440</pNativePrim>
                 </drawPathLoop>
                 <fillPathLoop>
                   <methodSignature>FillPath(...)</methodSignature>
@@ -648,7 +648,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053568</pNativePrim>
+                  <pNativePrim>8791158946496</pNativePrim>
                 </fillPathLoop>
                 <fillSpansLoop>
                   <methodSignature>FillSpans(...)</methodSignature>
@@ -656,7 +656,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053176</pNativePrim>
+                  <pNativePrim>8791158946104</pNativePrim>
                 </fillSpansLoop>
                 <fillParallelogramLoop>
                   <methodSignature>FillParallelogram(...)</methodSignature>
@@ -664,7 +664,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053232</pNativePrim>
+                  <pNativePrim>8791158946160</pNativePrim>
                 </fillParallelogramLoop>
                 <drawParallelogramLoop>
                   <methodSignature>DrawParallelogram(...)</methodSignature>
@@ -672,7 +672,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774053288</pNativePrim>
+                  <pNativePrim>8791158946216</pNativePrim>
                 </drawParallelogramLoop>
                 <drawGlyphListLoop>
                   <methodSignature>DrawGlyphList(...)</methodSignature>
@@ -680,7 +680,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next/next"/>
-                  <pNativePrim>8790774054016</pNativePrim>
+                  <pNativePrim>8791158946944</pNativePrim>
                 </drawGlyphListLoop>
                 <drawGlyphListAALoop>
                   <methodSignature>DrawGlyphListAA(...)</methodSignature>
@@ -688,7 +688,7 @@
                   <sourceType reference="../../drawLineLoop/sourceType"/>
                   <compositeType reference="../../drawLineLoop/compositeType"/>
                   <destType reference="../../../surfaceType/next"/>
-                  <pNativePrim>8790774064200</pNativePrim>
+                  <pNativePrim>8791158957128</pNativePrim>
                 </drawGlyphListAALoop>
               </solidloops>
             </sdDefault>
@@ -731,7 +731,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475955232</pData>
+              <pData>1452355680</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -783,7 +783,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475961504</pData>
+              <pData>1462926480</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -835,7 +835,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475964192</pData>
+              <pData>1462931728</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -887,7 +887,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475960480</pData>
+              <pData>1462938256</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -939,7 +939,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475955104</pData>
+              <pData>1452356064</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -991,7 +991,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475962656</pData>
+              <pData>1462923920</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -1043,7 +1043,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475964320</pData>
+              <pData>1462922256</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -1095,7 +1095,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475960608</pData>
+              <pData>1462922768</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -1147,7 +1147,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1484155392</pData>
+              <pData>1452356448</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -1199,7 +1199,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475962784</pData>
+              <pData>1462927504</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -1251,7 +1251,7 @@
           <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
             <bImg reference="../.."/>
             <sdDefault class="sun.awt.image.BufImgSurfaceData">
-              <pData>1475964448</pData>
+              <pData>1462931088</pData>
               <valid>true</valid>
               <surfaceLost>false</surfaceLost>
               <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
@@ -1306,9 +1306,9 @@
       <condicaoExistencia>true</condicaoExistencia>
       <posColuna>0</posColuna>
       <posLinha>0</posLinha>
-      <posX>708</posX>
-      <posY>532</posY>
-      <qntVida>1100</qntVida>
+      <posX>536</posX>
+      <posY>172</posY>
+      <qntVida>1600</qntVida>
       <lifeBar serialization="custom">
         <java.awt.Component>
           <default>
@@ -1410,7 +1410,7 @@
                   <null/>
                 </javax.swing.event.EventListenerList>
               </listenerList>
-              <value>1100</value>
+              <value>1600</value>
               <extent>0</extent>
               <min>0</min>
               <max>2000</max>
@@ -1549,7 +1549,7 @@
                 <is__LinearRGB__stdScale>false</is__LinearRGB__stdScale>
                 <is__LinearGray__stdScale>false</is__LinearGray__stdScale>
                 <is__ICCGray__stdScale>false</is__ICCGray__stdScale>
-                <needScaleInit>true</needScaleInit>
+                <needScaleInit>false</needScaleInit>
                 <noUnnorm>false</noUnnorm>
                 <nonStdScale>false</nonStdScale>
               </colorModel>
@@ -1628,7 +1628,7 @@
                 <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
                   <bImg reference="../.."/>
                   <sdDefault class="sun.awt.image.BufImgSurfaceData">
-                    <pData>1475965984</pData>
+                    <pData>1452649360</pData>
                     <valid>true</valid>
                     <surfaceLost>false</surfaceLost>
                     <surfaceType>
@@ -1658,7 +1658,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052256</pNativePrim>
+                        <pNativePrim>8791158945184</pNativePrim>
                       </drawLineLoop>
                       <fillRectLoop>
                         <methodSignature>FillRect(...)</methodSignature>
@@ -1666,7 +1666,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052032</pNativePrim>
+                        <pNativePrim>8791158944960</pNativePrim>
                       </fillRectLoop>
                       <drawRectLoop>
                         <methodSignature>DrawRect(...)</methodSignature>
@@ -1674,7 +1674,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052312</pNativePrim>
+                        <pNativePrim>8791158945240</pNativePrim>
                       </drawRectLoop>
                       <drawPolygonsLoop>
                         <methodSignature>DrawPolygons(...)</methodSignature>
@@ -1682,7 +1682,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052368</pNativePrim>
+                        <pNativePrim>8791158945296</pNativePrim>
                       </drawPolygonsLoop>
                       <drawPathLoop>
                         <methodSignature>DrawPath(...)</methodSignature>
@@ -1690,7 +1690,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052424</pNativePrim>
+                        <pNativePrim>8791158945352</pNativePrim>
                       </drawPathLoop>
                       <fillPathLoop>
                         <methodSignature>FillPath(...)</methodSignature>
@@ -1698,7 +1698,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052480</pNativePrim>
+                        <pNativePrim>8791158945408</pNativePrim>
                       </fillPathLoop>
                       <fillSpansLoop>
                         <methodSignature>FillSpans(...)</methodSignature>
@@ -1706,7 +1706,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052088</pNativePrim>
+                        <pNativePrim>8791158945016</pNativePrim>
                       </fillSpansLoop>
                       <fillParallelogramLoop>
                         <methodSignature>FillParallelogram(...)</methodSignature>
@@ -1714,7 +1714,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052144</pNativePrim>
+                        <pNativePrim>8791158945072</pNativePrim>
                       </fillParallelogramLoop>
                       <drawParallelogramLoop>
                         <methodSignature>DrawParallelogram(...)</methodSignature>
@@ -1722,7 +1722,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052200</pNativePrim>
+                        <pNativePrim>8791158945128</pNativePrim>
                       </drawParallelogramLoop>
                       <drawGlyphListLoop>
                         <methodSignature>DrawGlyphList(...)</methodSignature>
@@ -1730,7 +1730,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType/next"/>
-                        <pNativePrim>8790774052928</pNativePrim>
+                        <pNativePrim>8791158945856</pNativePrim>
                       </drawGlyphListLoop>
                       <drawGlyphListAALoop>
                         <methodSignature>DrawGlyphListAA(...)</methodSignature>
@@ -1738,7 +1738,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType"/>
-                        <pNativePrim>8790774067512</pNativePrim>
+                        <pNativePrim>8791158960440</pNativePrim>
                       </drawGlyphListAALoop>
                       <drawGlyphListLCDLoop>
                         <methodSignature>DrawGlyphListLCD(...)</methodSignature>
@@ -1746,7 +1746,7 @@
                         <sourceType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/sourceType"/>
                         <compositeType reference="../../../../../../../../../../../../model.Sprite/default/sprites/java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops/drawLineLoop/compositeType"/>
                         <destType reference="../../../surfaceType"/>
-                        <pNativePrim>8790774067568</pNativePrim>
+                        <pNativePrim>8791158960496</pNativePrim>
                       </drawGlyphListLCDLoop>
                     </solidloops>
                   </sdDefault>
@@ -1789,23 +1789,6 @@
               </java.awt.image.BufferedImage>
               <java.awt.image.BufferedImage>
                 <accelerationPriority>0.5</accelerationPriority>
-                <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
-                  <bImg reference="../.."/>
-                  <sdDefault class="sun.awt.image.BufImgSurfaceData">
-                    <pData>1475964960</pData>
-                    <valid>true</valid>
-                    <surfaceLost>false</surfaceLost>
-                    <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
-                    <colorModel class="java.awt.image.ComponentColorModel" reference="../../../../../personagem/colorModel"/>
-                    <disposerReferent/>
-                    <stateDelegate reference="../../../../../personagem/raster/dataBuffer/theTrackable"/>
-                    <haveLCDLoop>0</haveLCDLoop>
-                    <havePgramXORLoop>0</havePgramXORLoop>
-                    <havePgramSolidLoop>0</havePgramSolidLoop>
-                    <bufImg reference="../../.."/>
-                    <solidloops reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops"/>
-                  </sdDefault>
-                </surfaceManager>
                 <imageType>6</imageType>
                 <colorModel class="java.awt.image.ComponentColorModel" reference="../../../personagem/colorModel"/>
                 <raster class="sun.awt.image.ByteInterleavedRaster">
@@ -1844,23 +1827,6 @@
               </java.awt.image.BufferedImage>
               <java.awt.image.BufferedImage>
                 <accelerationPriority>0.5</accelerationPriority>
-                <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
-                  <bImg reference="../.."/>
-                  <sdDefault class="sun.awt.image.BufImgSurfaceData">
-                    <pData>1475957152</pData>
-                    <valid>true</valid>
-                    <surfaceLost>false</surfaceLost>
-                    <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
-                    <colorModel class="java.awt.image.ComponentColorModel" reference="../../../../../personagem/colorModel"/>
-                    <disposerReferent/>
-                    <stateDelegate reference="../../../../../personagem/raster/dataBuffer/theTrackable"/>
-                    <haveLCDLoop>0</haveLCDLoop>
-                    <havePgramXORLoop>0</havePgramXORLoop>
-                    <havePgramSolidLoop>0</havePgramSolidLoop>
-                    <bufImg reference="../../.."/>
-                    <solidloops reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops"/>
-                  </sdDefault>
-                </surfaceManager>
                 <imageType>6</imageType>
                 <colorModel class="java.awt.image.ComponentColorModel" reference="../../../personagem/colorModel"/>
                 <raster class="sun.awt.image.ByteInterleavedRaster">
@@ -1899,23 +1865,6 @@
               </java.awt.image.BufferedImage>
               <java.awt.image.BufferedImage>
                 <accelerationPriority>0.5</accelerationPriority>
-                <surfaceManager class="sun.awt.image.BufImgSurfaceManager">
-                  <bImg reference="../.."/>
-                  <sdDefault class="sun.awt.image.BufImgSurfaceData">
-                    <pData>1484155520</pData>
-                    <valid>true</valid>
-                    <surfaceLost>false</surfaceLost>
-                    <surfaceType reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/surfaceType"/>
-                    <colorModel class="java.awt.image.ComponentColorModel" reference="../../../../../personagem/colorModel"/>
-                    <disposerReferent/>
-                    <stateDelegate reference="../../../../../personagem/raster/dataBuffer/theTrackable"/>
-                    <haveLCDLoop>0</haveLCDLoop>
-                    <havePgramXORLoop>0</havePgramXORLoop>
-                    <havePgramSolidLoop>0</havePgramSolidLoop>
-                    <bufImg reference="../../.."/>
-                    <solidloops reference="../../../../java.awt.image.BufferedImage/surfaceManager/sdDefault/solidloops"/>
-                  </sdDefault>
-                </surfaceManager>
                 <imageType>6</imageType>
                 <colorModel class="java.awt.image.ComponentColorModel" reference="../../../personagem/colorModel"/>
                 <raster class="sun.awt.image.ByteInterleavedRaster">
@@ -1957,16 +1906,16 @@
         </model.Sprite>
         <model.Poder>
           <default>
-            <aparencia>3</aparencia>
+            <aparencia>0</aparencia>
             <ativo>false</ativo>
             <custo>200</custo>
             <dano>500</dano>
             <distancia>4</distancia>
-            <posX>580</posX>
-            <posY>532</posY>
+            <posX>568</posX>
+            <posY>172</posY>
             <rectangle>
-              <x>580</x>
-              <y>532</y>
+              <x>600</x>
+              <y>172</y>
               <width>32</width>
               <height>32</height>
             </rectangle>
@@ -1974,15 +1923,21 @@
         </model.Poder>
       </poder>
       <rectangle>
-        <x>708</x>
-        <y>532</y>
+        <x>536</x>
+        <y>172</y>
         <width>32</width>
         <height>32</height>
       </rectangle>
+      <tempos>
+        <tempoFases>0:28</tempoFases>
+        <tempoFases>0:35</tempoFases>
+        <tempoFases>0:18</tempoFases>
+      </tempos>
     </default>
   </model.Personagem>
   <model.Protagonista>
     <default>
+      <action>-1</action>
       <morto>false</morto>
       <pontuacao>1250</pontuacao>
       <qntBausAbertos>0</qntBausAbertos>
@@ -1997,12 +1952,8 @@
       </direcoes>
       <intersectBau>false</intersectBau>
       <nome>A</nome>
-      <tempo>0:24</tempo>
-      <tempoFases>
-        <tempoFases>0:15</tempoFases>
-        <tempoFases>0:20</tempoFases>
-        <tempoFases>0:24</tempoFases>
-      </tempoFases>
+      <tempo>0:18</tempo>
+      <tempoFases/>
     </default>
   </model.Protagonista>
 </model.Protagonista>

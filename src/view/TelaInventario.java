@@ -18,11 +18,8 @@ public class TelaInventario extends JPanel{
 	private ImageIcon iiPausar;
 	private JLabel lbNome, lbPontuacao, lbNomeFase;
 	private JButton btnPausar;
-	//private String nomePersonagem, camingoImagemBackground, pontuacao;
 	private int qntBaus;
-	
 	private ImageIcon iiBg, iiThumb;
-	
 	public JLabel timer;
 	
 	public TelaInventario(){
@@ -61,6 +58,7 @@ public class TelaInventario extends JPanel{
 		btnPausar.setFocusPainted(false);
 		btnPausar.setToolTipText("Pausar");
 		
+		
 	
 		
 		this.qntBaus = 0;
@@ -85,10 +83,13 @@ public class TelaInventario extends JPanel{
 		int posY = 450;
 		
 		for (int i = 0; i < this.qntBaus; i++) {
+			g.drawString("-10", posX+5, posY);
 			g.drawImage(new ImageIcon("src/img/bauAberto.png").getImage(), posX, posY, this);
 			posX = posX + 62;
 		}
 	
+		
+		
 	}
 	
 	public int getQntBaus() {

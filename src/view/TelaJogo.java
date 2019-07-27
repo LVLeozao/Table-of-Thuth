@@ -14,6 +14,7 @@ import model.Bau;
 import model.Camada;
 import model.GerarPosicao;
 import model.Inimigo;
+import model.Itens;
 import model.Personagem;
 import model.Protagonista;
 
@@ -27,7 +28,8 @@ public abstract class TelaJogo extends JPanel {
 	private ArrayList<Personagem> personagens;
 
 	private Inimigo inimigo1, inimigo2, inimigo3;
-	//private Protagonista protagonista;
+	
+	private Itens itens;
 
 	private Boolean telaAtiva;
 
@@ -68,7 +70,7 @@ public abstract class TelaJogo extends JPanel {
 		this.faseAtiva3 = false;
 		
 		
-		
+		this.telaAtiva = true;
 		
 		camada3 = new Camada(this.camadaTile3, this.arquivoCamada3, 25, 22, 32, 32);
 		camada3.montarMapa(800, 704);
@@ -78,7 +80,7 @@ public abstract class TelaJogo extends JPanel {
 		baus.add(new Bau("", matzColisaoBaus.get(2)));
 		
 		try {
-
+			itens = new Itens("img/itens.png", 64, 64, 1, 5, 0, 50, 50);
 			personagens = new ArrayList<Personagem>();
 
 			inimigo1 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500, "", 0);
@@ -150,16 +152,28 @@ public abstract class TelaJogo extends JPanel {
 			g.drawImage(new ImageIcon("src/img/And.png").getImage(), 0, 0, this);
 		}
 		else if(this.faseAtiva2){
+			
 			g.drawImage(new ImageIcon("src/img/Or.png").getImage(), 0, 0, this);
 		}
 		else if(this.faseAtiva3){
 			g.drawImage(new ImageIcon("src/img/Not.png").getImage(), 0, 0, this);
+		}
+		
+		if(itens.isAtivo()){
+			g.drawImage(itens.getSprites()[itens.getAparencia()].getScaledInstance(32, 32, 100), itens.getPosX(),
+					itens.getPosY(), this);
 		}
 
 	}
 
 	public Boolean getFaseAtiva1() {
 		return faseAtiva1;
+	}
+
+
+
+	public Itens getItens() {
+		return itens;
 	}
 
 
