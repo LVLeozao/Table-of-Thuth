@@ -2,8 +2,11 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import model.BancoExercicios;
 import model.Destroy;
+import model.Exercicio;
 import model.Itens;
 import model.Protagonista;
 import view.SinglePlayer;
@@ -21,6 +24,7 @@ public class ControleSinglePlayer extends Thread implements ActionListener{
 	private int numeroFase;
 	private ControleFase controleFase;
 	private ThreadTransicao threadTransicao;
+	private ArrayList<Exercicio> listaAnd, listaNot, listaOr;
 	
 	
 	
@@ -37,18 +41,23 @@ public class ControleSinglePlayer extends Thread implements ActionListener{
 		threadTransicao = new ThreadTransicao(single);
 		threadTransicao.start();
 		
+		listaAnd = new ArrayList<Exercicio>();
+		listaOr = new ArrayList<Exercicio>();
+		listaNot = new ArrayList<Exercicio>();
+		
 		
 		ativar();
+		registrarExercicios();
 		setarFase();
 		
 	}
 	
 	public void verificarFaseAtiva(){
 		if(this.controleFase.getAtiva() == false){
-			
 			this.matarControleFase();
 			
 			this.protagonista.setQntBausAbertos(0);
+			
 			
 			this.motrarResultado();
 			
@@ -57,12 +66,11 @@ public class ControleSinglePlayer extends Thread implements ActionListener{
 	}
 	
 	public void motrarResultado(){
-		this.single.getCardResultados().show(this.single.getPanelResultados(), "1");
-
 		this.single.getPanelInventario().setVisible(false);
 		this.single.getPanelJogavel().setVisible(false);
 		this.single.getPanelResultados().setVisible(true);
 		
+		this.single.getCardResultados().show(this.single.getPanelResultados(), "1");
 
 		this.single.getTelaTransicao().getSomVitoria().play();
 		
@@ -135,6 +143,24 @@ public class ControleSinglePlayer extends Thread implements ActionListener{
 		}
 	}
 	
+	public void registrarExercicios(){
+		
+		for (Exercicio ex : BancoExercicios.getArray()) {
+			if(ex.getTag().equalsIgnoreCase("and")){
+				
+				listaAnd.add(ex);
+			}
+			else if(ex.getTag().equalsIgnoreCase("or")){
+				listaOr.add(ex);
+			}
+			else if(ex.getTag().equalsIgnoreCase("not")){
+				listaNot.add(ex);
+			}
+		
+		}
+		
+	}
+	
 	public void setarFase(){
 		this.single.getPanelInventario().setVisible(true);
 		this.single.getPanelJogavel().setVisible(true);
@@ -148,6 +174,10 @@ public class ControleSinglePlayer extends Thread implements ActionListener{
 		
 			case 1:
 				
+				
+				this.single.getTelaAnd().getInimigo1().setExercicio(listaAnd.get(0));
+				this.single.getTelaAnd().getInimigo2().setExercicio(listaAnd.get(1));
+				this.single.getTelaAnd().getInimigo3().setExercicio(listaAnd.get(2));
 				
 				this.controleFase = new ControleFase(this.single.getTelaAnd(), this.protagonista, this.telaInventario, "AND");
 				this.controleFase.start();
@@ -164,6 +194,11 @@ public class ControleSinglePlayer extends Thread implements ActionListener{
 				break;
 				
 			case 2:
+				
+				this.single.getTelaOr().getInimigo1().setExercicio(listaAnd.get(0));
+				this.single.getTelaOr().getInimigo2().setExercicio(listaAnd.get(1));
+				this.single.getTelaOr().getInimigo3().setExercicio(listaAnd.get(2));
+				
 				this.protagonista.setPosX(352);
 				this.protagonista.setPosY(576);
 				
@@ -186,6 +221,11 @@ public class ControleSinglePlayer extends Thread implements ActionListener{
 				
 				
 			case 3:
+				
+				this.single.getTelaNot().getInimigo1().setExercicio(listaAnd.get(0));
+				this.single.getTelaNot().getInimigo2().setExercicio(listaAnd.get(1));
+				this.single.getTelaNot().getInimigo3().setExercicio(listaAnd.get(2));
+				
 				this.protagonista.setPosX(256);
 				this.protagonista.setPosY(608);
 				
@@ -254,6 +294,7 @@ public class ControleSinglePlayer extends Thread implements ActionListener{
 		while(true){
 			try{
 				if(this.controleFase.isAlive()){
+					
 					this.verificarVidaPersonagem();
 					this.verificarFaseAtiva();
 				}

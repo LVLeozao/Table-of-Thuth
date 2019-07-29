@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import model.BancoExercicios;
+
 public class TelaCadastro extends JFrame{
 	private JLabel lbEnunciado, lbResposta, lbTag, lbIdentificador;
 	private JTextField tfEnunciado, tfResposta, tfTag, tfIdentificador;
@@ -93,7 +95,8 @@ public class TelaCadastro extends JFrame{
 		
 		textArea.setFont(new Font("Heliabe", Font.PLAIN, 12));
 		textArea.setEditable(false);
-		textArea.setText(" = Questões Cadastradas = ");
+		
+		textArea.setText(BancoExercicios.gerarTexto());
 		
 		panelAdd.add(lbEnunciado);
 		panelAdd.add(tfEnunciado);
@@ -121,9 +124,11 @@ public class TelaCadastro extends JFrame{
 		add(panelText);
 		
 		
-		setVisible(true);
+		setVisible(false);
 	}
+	
 
+	
 	public JTextField getTfEnunciado() {
 		return tfEnunciado;
 	}
@@ -162,6 +167,12 @@ public class TelaCadastro extends JFrame{
 
 	public JRadioButton getRbRemover() {
 		return rbRemover;
+	}
+
+
+
+	public JPanel getPanelRemove() {
+		return panelRemove;
 	}
 	
 	

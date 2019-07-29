@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 public class TelaAbertura extends JPanel {
 	
 	private JLabel lbWallpaper;
-	private JButton btnSingle, btnMultiplayer, btnConfig, btnExit;
+	private JButton btnSingle, btnMultiplayer, btnConfig, btnExit, btnAdd;
 	private ImageIcon iiSingle, iiMultiplayer, iiConfig, iiExit, iiWallpaper;
 	//private Som somAbertura;
 	
@@ -59,20 +59,31 @@ public class TelaAbertura extends JPanel {
 		btnExit.setBounds(937, 625, 60, 60);
 		btnExit.setToolTipText("Sair");
 
-		
+		btnAdd = new JButton(new ImageIcon(getClass().getClassLoader().getResource("img/add.png")));
+		btnAdd.setContentAreaFilled(false);
+		btnAdd.setBorderPainted(false);
+		btnAdd.setBounds(5, 5, 64, 64);
+		btnAdd.setToolTipText("Adicionar Exercicio");
 		
 		add(btnSingle);	
 		add(btnMultiplayer);
 		add(btnConfig);
 		add(btnExit);
+		add(btnAdd);
 		add(lbWallpaper);
 		
-		//setFocusable(true);
+		
 		
 
 	}
 	
 	
+
+	public JButton getBtnAdd() {
+		return btnAdd;
+	}
+
+
 
 	public JButton getBtnSingle() {
 		return btnSingle;

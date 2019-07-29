@@ -1,8 +1,12 @@
 package view;
 
 import java.awt.CardLayout;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
+
+import model.Exercicio;
+import model.Protagonista;
 
 public class SinglePlayer{
 	private JPanel  panelJogavel, panelInventario, panelResultados;
@@ -16,8 +20,12 @@ public class SinglePlayer{
 	private TelaTransicao telaTransicao;
 	private CardLayout cardJogavel, cardInventario, cardResultados;
 	
+	private ArrayList<Exercicio> exercicios;
 	
 	public SinglePlayer(Tela tela){
+		
+		
+		this.exercicios = new ArrayList<Exercicio>();
 		
 		this.cardJogavel = new CardLayout();
 		this.cardInventario = new CardLayout();
@@ -144,6 +152,12 @@ public class SinglePlayer{
 
 	public CardLayout getCardInventario() {
 		return cardInventario;
+	}
+
+
+
+	public ArrayList<Exercicio> getExercicios() {
+		return exercicios;
 	}
 	
 	

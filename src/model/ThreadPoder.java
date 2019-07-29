@@ -31,10 +31,11 @@ public class ThreadPoder extends Thread {
 	
 			
 			if(!personagem.getBounds().intersects(obj.getBounds())){
-			
+				
 		
 				if(personagem.getPoder().getBound().intersects(obj.getBounds())){
-				
+		
+					
 					obj.setQntVida(obj.getQntVida()-personagem.getPoder().getDano());
 					return false;
 				}

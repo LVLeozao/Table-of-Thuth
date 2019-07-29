@@ -60,8 +60,6 @@ public class ControleFase extends Thread{
 		ativarThread();
 		
 		this.telaJogo.setTelaAtiva(true);
-		
-		
 		this.controlePersonagem = new ControlePersonagem(this.protagonista, this.matzColisao, this.personagens);
 		this.telaJogo.addKeyListener(new ControleKeySingle(this.protagonista));
 		this.controlePersonagem.start();
@@ -101,9 +99,9 @@ public class ControleFase extends Thread{
 		
 			case 0:	
 				
-				this.thread1.setSpeed(5000);
-				this.thread2.setSpeed(5000);
-				this.thread3.setSpeed(5000);
+				this.thread1.setSpeed(600);
+				this.thread2.setSpeed(600);
+				this.thread3.setSpeed(600);
 				break;
 	
 			case 1:
@@ -159,14 +157,17 @@ public class ControleFase extends Thread{
 	
 	public void responderQuestionario(Inimigo temp){
 		this.protagonista.setAction(-1);
-		int resposta = ShowMessage.activeInputDialog(temp.getTexto());
+		int resposta = ShowMessage.activeInputDialog(temp.getExercicio().getText());
 		
 		Protagonista temp2  = (Protagonista) this.personagens.get(3);
 		
-		if(resposta == temp.getResposta()){
+		if(resposta == 0 && temp.getExercicio().getResposta().equalsIgnoreCase("true")){
 			this.protagonista.setPontuacao(this.protagonista.getPontuacao()+250);
 			this.telaInventario.getLbPontuacao().setText(this.protagonista.getPontuacao()+"");
 			this.protagonista.getLifeBar().setValue(this.protagonista.getQntVida()+100);
+			this.protagonista.getExercicios().add(temp.getExercicio());
+			
+			
 		}
 		else{
 			this.protagonista.setQntVida(this.protagonista.getQntVida()-100);
@@ -180,6 +181,8 @@ public class ControleFase extends Thread{
 		for (Bau bau : baus){
 		
 			if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== false){	
+					
+					desativarThread();
 					this.protagonista.setAction(-1);
 					bau.getSomBau().play();
 					bau.mostrarInformação();
@@ -189,13 +192,15 @@ public class ControleFase extends Thread{
 					this.protagonista.setPontuacao(this.protagonista.getPontuacao()-10);
 					this.telaInventario.getLbPontuacao().setText(this.protagonista.getPontuacao()+"");
 					
-					
+					ativarThread();
 					
 					
 			}
 			else if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== true){
+				desativarThread();
 				this.protagonista.setAction(-1);
 				ShowMessage.showText("Báu já foi ativado!");
+				ativarThread();
 			}	
 		}
 		this.protagonista.setIntersectBau(false);
@@ -246,19 +251,20 @@ public class ControleFase extends Thread{
 		this.timer = null;
 		this.controlePersonagem = null;
 		this.telaJogo.setTelaAtiva(false);
+		this.ativa = false;
 		System.gc();
 	}
 	
 	public void faseAtiva(){
 		
 		if(this.qntInimigosMortos == 3){
-			matarControle();
 		
 		
 			this.protagonista.setAction(-1);
 			this.qntInimigosMortos = 0;
 			this.telaJogo.setTelaAtiva(false);
-			this.ativa = false;
+			
+			matarControle();
 		}
 	}
 	

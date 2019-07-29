@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import javax.swing.JProgressBar;
 
 public abstract class Personagem extends Sprite{
-	private int qntVida;
+	transient private int qntVida;
 	
-	private int posX, posY;
-	private int posLinha, posColuna;
-	private boolean condicaoExistencia;
-	private Poder poder;
-	private JProgressBar lifeBar;
-	private Rectangle rectangle;
+	transient private int posX, posY;
+	transient private int posLinha, posColuna;
+	transient private boolean condicaoExistencia;
+	transient private Poder poder;
+	transient private JProgressBar lifeBar;
+	transient private Rectangle rectangle;
 	private ArrayList<String>tempos;
 
 	

@@ -2,39 +2,47 @@ package model;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.beans.Transient;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-public class Protagonista extends Personagem {
+public class Protagonista extends Personagem implements Comparable<Protagonista>{
 	private String nome;
 	private int pontuacao;
-	private Boolean intersectBau;
-	private String caminhoTumb;
-	private int qntBausAbertos;
-	private String tempo;
-	private boolean morto = false;
-	private ArrayList<String> tempoFases;
-	private int direcoes[];
-	private int action=-1;
+	transient private Boolean intersectBau;
+	transient private String caminhoTumb;
+	transient private int qntBausAbertos;
+	transient private String tempo;
+	transient private boolean morto = false;
 	
+	private ArrayList<Exercicio> exercicios;
+
+	transient private int direcoes[];
+	
+	transient private int action=-1;
+	
+	private String modoFase;
 	
 	
 	public Protagonista(String fileImage, int largura, int altura, int linhas, int colunas, int aparencia, int qntVida,
 			int posX, int posY,String nome, boolean condicaoExistenci, String poderImage,
-			int colunasPoder, int larguraPoder, int dano, String caminhoThumb, int modoTeclado) throws IOException {
+			int colunasPoder, int larguraPoder, int dano, String caminhoThumb, int modoTeclado, String modoFase) throws IOException {
 		super(fileImage, largura, altura, linhas, colunas, aparencia, qntVida, posX, posY
 				, condicaoExistenci, poderImage, colunasPoder, larguraPoder, dano);
 		
+		this.modoFase = modoFase;
 		this.nome = nome;
 		this.intersectBau = false;
 		this.caminhoTumb = caminhoThumb;
 		getLifeBar().setBounds(25, 371, 153, 15);
 		this.qntBausAbertos = 0;
 		
-		this.tempoFases = new ArrayList<String>();
+		this.exercicios = new ArrayList<Exercicio>();
+		
+		
 		this.direcoes = new int[6];
 		
 		if(modoTeclado == 1){
@@ -66,6 +74,30 @@ public class Protagonista extends Personagem {
 	
 	
 	
+	public ArrayList<Exercicio> getExercicios() {
+		return exercicios;
+	}
+
+
+
+
+
+	public String getModoFase() {
+		return modoFase;
+	}
+
+
+
+
+
+	public void setModoFase(String modoFase) {
+		this.modoFase = modoFase;
+	}
+
+
+
+
+
 	public int getAction() {
 		return action;
 	}
@@ -90,9 +122,6 @@ public class Protagonista extends Personagem {
 
 
 
-	public ArrayList<String> getTempoFases() {
-		return tempoFases;
-	}
 
 
 
@@ -159,6 +188,21 @@ public class Protagonista extends Personagem {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+
+
+
+
+	@Override
+	public int compareTo(Protagonista o) {
+		 if (this.pontuacao > o.getPontuacao()) {
+	          return -1;
+	     }
+	     if (this.pontuacao < o.getPontuacao()) {
+	          return 1;
+	     }
+	     return 0;
 	}
 	
 }

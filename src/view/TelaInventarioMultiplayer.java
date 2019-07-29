@@ -25,12 +25,12 @@ public class TelaInventarioMultiplayer extends JPanel{
 		setLayout(null);
 		setSize(200,704);
 		
-		lbNomePlayer1 = new JLabel("Leonardo");
+		lbNomePlayer1 = new JLabel("");
 		lbNomePlayer1.setFont(new Font("Heliabe", Font.BOLD, 12));
 		lbNomePlayer1.setForeground(new Color(0,0,0));
 		lbNomePlayer1.setBounds(58, 90, 74, 15);
 		
-		lbNomePlayer2 = new JLabel("Rebekah");
+		lbNomePlayer2 = new JLabel("");
 		lbNomePlayer2.setFont(new Font("Heliabe", Font.BOLD, 12));
 		lbNomePlayer2.setForeground(new Color(0,0,0));
 		lbNomePlayer2.setBounds(58, 164, 74, 15);
@@ -118,6 +118,18 @@ public class TelaInventarioMultiplayer extends JPanel{
 
 	public JProgressBar getBarPlayer2() {
 		return barPlayer2;
+	}
+
+	public JLabel getLbNomePlayer1() {
+		return lbNomePlayer1;
+	}
+
+	public JLabel getLbNomePlayer2() {
+		return lbNomePlayer2;
+	}
+
+	public JTextArea getTextArea() {
+		return textArea;
 	}
 	
 	

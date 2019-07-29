@@ -10,8 +10,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import model.BancoExercicios;
 import model.Bau;
 import model.Camada;
+import model.Exercicio;
 import model.GerarPosicao;
 import model.Inimigo;
 import model.Itens;
@@ -26,7 +28,7 @@ public abstract class TelaJogo extends JPanel {
 	private ArrayList<Rectangle> matzColisaoBaus;
 	private ArrayList<Bau> baus = new ArrayList<Bau>();
 	private ArrayList<Personagem> personagens;
-
+	
 	private Inimigo inimigo1, inimigo2, inimigo3;
 	
 	private Itens itens;
@@ -55,6 +57,8 @@ public abstract class TelaJogo extends JPanel {
 
 		setSize(800, 704);
 		setLayout(null);
+		
+		
 
 		camada1 = new Camada(this.camadaTile1, this.arquivoCamada1, 25, 22, 32, 32);
 		camada1.montarMapa(800, 704);
@@ -83,9 +87,9 @@ public abstract class TelaJogo extends JPanel {
 			itens = new Itens("img/itens.png", 64, 64, 1, 5, 0, 50, 50);
 			personagens = new ArrayList<Personagem>();
 
-			inimigo1 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500, "", 0);
-			inimigo2 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500, "", 0);
-			inimigo3 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500, "", 0);
+			inimigo1 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500);
+			inimigo2 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500);
+			inimigo3 = new Inimigo(imgInimigo, 32, 32, 4, 3, 3, 2000, 0, 0, true, poderImagemInimigo, 4, 128, 500);
 
 			personagens.add(inimigo1);
 			personagens.add(inimigo2);

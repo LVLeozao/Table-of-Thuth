@@ -8,11 +8,11 @@ import javax.imageio.ImageIO;
 import javax.swing.JProgressBar;
 
 public class Sprite extends JProgressBar{
-	private BufferedImage personagem;
-	private int largura, altura;
-	private int linhas, colunas;
-	private BufferedImage[] sprites;
-	private int aparencia;
+	transient private BufferedImage personagem;
+	transient private int largura, altura;
+	transient private int linhas, colunas;
+	transient private BufferedImage[] sprites;
+	transient private int aparencia;
 
 	
 	

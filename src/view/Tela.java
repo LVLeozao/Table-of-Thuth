@@ -1,7 +1,9 @@
 package view;
 
 import java.awt.CardLayout;
+import java.awt.List;
 import java.awt.Rectangle;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -24,8 +26,10 @@ public class Tela extends JFrame{
 	private TelaInformacoes telaInformacoes;
 	private TelaSelecao telaSelecao;
 	private XmlUsuario xml;
-	private TelaInventarioMultiplayer telaInventarioMultiplayer;
-	private Multiplayer multiplayer;
+	
+	private ArrayList<Protagonista> resultados;
+	
+	
 	
 	public Tela(){
 		setSize(1000,704);
@@ -42,13 +46,17 @@ public class Tela extends JFrame{
 		panelGeral.setBounds(0, 0, 1000, 704);
 		
 		
-		this.multiplayer = new Multiplayer();
+		
+		xml = new XmlUsuario();
+		
+		resultados = (ArrayList<Protagonista>) xml.ler();
+
 		
 		
 		this.telaAbertura = new TelaAbertura();
-		this.telaInformacoes = new TelaInformacoes();
+		this.telaInformacoes = new TelaInformacoes(resultados);
 		this.telaSelecao = new TelaSelecao();
-		this.telaInventarioMultiplayer = new TelaInventarioMultiplayer();
+		
 		
 		
 		
@@ -67,8 +75,6 @@ public class Tela extends JFrame{
 		
 		//panelInventario.add(telaInventarioMultiplayer);
 		
-		xml = new XmlUsuario();
-		
 		this.telaConfig = new TelaConfiguracoes();
 		
 		add(panelGeral);
@@ -80,6 +86,13 @@ public class Tela extends JFrame{
 	}
 	
 	
+	
+
+	public void setResultados(ArrayList<Protagonista> resultados) {
+		this.resultados = resultados;
+	}
+
+
 
 
 	public XmlUsuario getXml() {
@@ -88,7 +101,7 @@ public class Tela extends JFrame{
 
 
 
-
+	
 
 
 	public TelaSelecao getTelaSelecao() {
@@ -118,22 +131,18 @@ public class Tela extends JFrame{
 	}
 
 
-	public TelaInventarioMultiplayer getTelaInventarioMultiplayer() {
-		return telaInventarioMultiplayer;
-	}
-
-
-
-
-	public Multiplayer getMultiplayer() {
-		return multiplayer;
-	}
-
 
 
 
 	public TelaConfiguracoes getTelaConfig() {
 		return telaConfig;
+	}
+
+
+
+
+	public ArrayList<Protagonista> getResultados() {
+		return resultados;
 	}
 	
 	

@@ -1,7 +1,9 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -11,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import model.Protagonista;
 
 
 public class TelaInformacoes extends JPanel{
@@ -22,32 +26,39 @@ public class TelaInformacoes extends JPanel{
 	private JRadioButton rbSingle, rbMulti;
 	private JTextArea textArea;
 	private JScrollPane barra;
+	private ArrayList<Protagonista> resultados;
 	
-	
-	public TelaInformacoes(){
+	public TelaInformacoes(ArrayList<Protagonista> resultados){
 		setLayout(null);
+		this.resultados = resultados;
 		
 		bg = new ButtonGroup();
 		
 		rbSingle = new JRadioButton("Single Player");
 		rbSingle.setBounds(500,100, 100, 40);
+		rbSingle.setVisible(false);
+		rbSingle.setForeground(new Color(255,255,255));
+		rbSingle.setContentAreaFilled(false);
 		
 		rbMulti = new JRadioButton("Multiplayer");
+		rbMulti.setForeground(new Color(255,255,255));
+		rbMulti.setContentAreaFilled(false);
 		rbMulti.setBounds(350,100, 100, 40);
-		
+		rbMulti.setVisible(false);
 		
 		bg.add(rbSingle);
 		bg.add(rbMulti);
 		
+		String text = " = = = = = = = = RANKING = = = = = = = = \n\n" + "- Selecione um modo!";
 		textArea = new JTextArea();
 		textArea.setBounds(330,150, 290, 350);
 		textArea.setVisible(true);
 		barra = new JScrollPane(textArea);
 		barra.setBounds(330,150,290,350);
-		textArea.setFont(new Font("Heliabe", Font.BOLD, 12));
+		textArea.setFont(new Font("Heliabe", Font.BOLD, 15));
 		textArea.setEditable(false);
-	
-		
+		barra.setVisible(false);
+		textArea.setText(text);
 		
 		btnResultados = new JButton(new ImageIcon(getClass().getClassLoader().getResource("img/RankingBtn.png")));
 		btnResultados.setBounds(270, 60, 66, 30);
@@ -87,8 +98,8 @@ public class TelaInformacoes extends JPanel{
 		add(btnVoltar);
 		add(btnResultados);
 
-		//add(rbMulti);
-		//add(rbSingle);
+		add(rbMulti);
+		add(rbSingle);
 		add(barra);
 		add(lbCredito);
 		add(lbSobre);
@@ -101,6 +112,13 @@ public class TelaInformacoes extends JPanel{
 	
 	
 	
+	public JScrollPane getBarra() {
+		return barra;
+	}
+
+
+
+
 	public JTextArea getTextArea() {
 		return textArea;
 	}
@@ -129,6 +147,14 @@ public class TelaInformacoes extends JPanel{
 	}
 	public JLabel getLbControle() {
 		return lbControle;
+	}
+
+	public JRadioButton getRbSingle() {
+		return rbSingle;
+	}
+
+	public JRadioButton getRbMulti() {
+		return rbMulti;
 	}
 	
 	

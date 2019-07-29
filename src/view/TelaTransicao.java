@@ -17,7 +17,7 @@ public class TelaTransicao extends JPanel {
 	private JLabel lbNome, lbPontuacao, lbTempo;
 	private Som somDerrota, somVitoria;
 	private JPanel panelLb;
-	private Boolean resultadoAtivo, morteAtiva, resultadoFinalAtivo, resultadoMultiplayer;
+	private Boolean resultadoAtivo, morteAtiva, resultadoFinalAtivo;
 	
 	public TelaTransicao(){
 		setLayout(null);
@@ -32,7 +32,7 @@ public class TelaTransicao extends JPanel {
 		this.resultadoAtivo = false;
 		this.morteAtiva = false;
 		this.resultadoFinalAtivo = false;
-		this.resultadoMultiplayer = false;
+		
 		
 	
 		this.btnConfirmar = new JButton(new ImageIcon("src/img/botaoConfirmar.png"));
@@ -98,6 +98,8 @@ public class TelaTransicao extends JPanel {
 			g.drawImage(new ImageIcon("src/img/TelaFinalMulti.png").getImage(), 0, 0, this);
 		}
 		
+
+		
 	}
 	
 	
@@ -115,13 +117,7 @@ public class TelaTransicao extends JPanel {
 		this.resultadoFinalAtivo = resultadoFinalAtivo;
 	}
 
-	public Boolean getResultadoMultiplayer() {
-		return resultadoMultiplayer;
-	}
-
-	public void setResultadoMultiplayer(Boolean resultadoMultiplayer) {
-		this.resultadoMultiplayer = resultadoMultiplayer;
-	}
+	
 
 	public Boolean getMorteAtiva() {
 		return morteAtiva;

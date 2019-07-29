@@ -28,7 +28,6 @@ public class ControlePersonagem extends Thread{
 		this.protagonista = protagonista;
 		this.matzColisao = matzColisao;
 		this.personagens = personagens;
-	
 		
 	}
 

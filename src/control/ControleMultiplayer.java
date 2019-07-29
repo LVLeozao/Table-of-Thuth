@@ -1,5 +1,7 @@
 package control;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 import model.Exercicio;
@@ -13,221 +15,143 @@ import view.Multiplayer;
 import view.ShowMessage;
 import view.Tela;
 import view.TelaInventarioMultiplayer;
+import view.TelaPausa;
+import view.TelaTransicao;
 
 
-public class ControleMultiplayer extends Thread{
+public class ControleMultiplayer extends Thread implements ActionListener{
 	
 	private Multiplayer multiplayer;
 	private TelaInventarioMultiplayer telaInventario;
+	private TelaPausa telaPausa;
+	private Protagonista ganhador;
+	
 	private Itens itens;
-	private Tela tela;
 	private Boolean telaAtiva;
+	private ControleFaseMultiplayer controleFase;
 	
 	
-	public ControleMultiplayer(TelaInventarioMultiplayer telaInventario, Multiplayer multiplayer, Tela tela){
+	public ControleMultiplayer(Multiplayer multi, String nome1, String nome2){
 		
-		this.tela = tela;
-		this.multiplayer = multiplayer;
-		this.telaInventario = telaInventario;
+		this.multiplayer = multi;
+		this.telaInventario = this.multiplayer.getTelaInventarioMultiplayer();
+		this.telaPausa = this.multiplayer.getTelaPausa();
+	
+		this.ganhador = null;
+		this.multiplayer.getTelaFloresta().getPlayer1().setNome(nome1);
+		this.multiplayer.getTelaFloresta().getPlayer2().setNome(nome2);
 		this.telaAtiva = true;
-		this.multiplayer.setControlePlayer1(new ControlePersonagem(this.multiplayer.getPlayer1(), this.multiplayer.getMatzColisao(), this.multiplayer.getPersonagens()));
-		this.multiplayer.setControlePlayer2(new ControlePersonagem(this.multiplayer.getPlayer2(), this.multiplayer.getMatzColisao(), this.multiplayer.getPersonagens()));
-		this.itens = this.multiplayer.getItens();
-		
-		
-		
-		
-		this.multiplayer.addKeyListener(new ControleKeyMulti(this.multiplayer.getPlayer1(), this.multiplayer.getPlayer2()));
 	
-		this.multiplayer.getControlePlayer1().start();
-		this.multiplayer.getControlePlayer2().start();
-		
+		setarFaser();
+		ativar();
 		
 	}
 	
-	public void responderQuestionario(Protagonista protagonista){
-		
-		
-		this.multiplayer.getControlePlayer1().setDirecao(-1);
-		this.multiplayer.getControlePlayer1().setDirecao(-1);
-		
-		Random random = new Random();
-		
-		int x = random.nextInt(5);
-		
-		Exercicio temp = this.multiplayer.getExercicios().get(x);
-		
-		
-		int resposta = ShowMessage.activeInputDialog(temp.getText());
-		
-		
-		if(resposta == temp.getResposta()){
-			protagonista.setPontuacao(protagonista.getPontuacao()+250);
-		}
-		else{
-			protagonista.setPontuacao(protagonista.getPontuacao()-150);
-		}
-		
-		this.multiplayer.setFocusable(true);
-		
-	}
+	public void setarFaser(){
+		this.multiplayer.getPanelInventario().setVisible(true);
+		this.multiplayer.getPanelJogavel().setVisible(true);
+		this.multiplayer.getCardInventario().show(this.multiplayer.getPanelInventario(), "1");
 	
-	
-	public void action(Protagonista protagonista, ControlePersonagem control){
-		System.out.println(this.itens.getAparencia());
-		switch (this.itens.getAparencia()) {
+		this.controleFase = new ControleFaseMultiplayer(this.multiplayer, this.multiplayer.getTelaFloresta());
+		this.controleFase.start();
 		
-			case 0:	
-				
-				control.setTempoThreadMovimento(control.getTempoThreadMovimento()-3);
-				
-				break;
-	
-			case 1:
-				protagonista.setQntVida(protagonista.getQntVida()+1000);
-				break;
-			
-			case 2:
-				control.setTempoThreadMovimento(control.getTempoThreadMovimento()+3);
-				break;
-			case 3:
-				protagonista.getPoder().setDano(protagonista.getPoder().getDano()+500);
-				break;
-			case 4:
-				this.multiplayer.setFocusable(true);
-				
-				this.responderQuestionario(protagonista);
-				
-				break;
-		}
-		
-		
-		int [] a =  GerarPosicao.gerarPosicaoXY(this.multiplayer.getMatzColisao(), this.multiplayer.getCamada2().mapa);
-		
-		this.multiplayer.getItens().setPosX(a[0]);
-		this.multiplayer.getItens().setPosY(a[1]);
-		
-		this.multiplayer.getItens().setAparencia(new Random().nextInt(5));
-		
-	}
-	
-	
-	public void intersectItem(){
-		
-		for (Personagem personagem : this.multiplayer.getPersonagens()) {
-			Protagonista temp = (Protagonista) personagem;
-			if(personagem.getBounds().intersects(this.multiplayer.getItens().getBounds())){
-				
-				if (temp.getNome().equalsIgnoreCase("Niklaus")){
-					
-					this.action(temp, this.multiplayer.getControlePlayer1());
-					
-					
-				}
-				else{
-					this.action(temp, this.multiplayer.getControlePlayer2());
-				}
-				
-				
-			}
-			
-		}
-	}
-	
-	public void finalizar(Protagonista protagonista){
-		
-		for (Personagem personagem : this.multiplayer.getPersonagens()) {
-			if(personagem.getQntVida() >0){
-				this.tela.getTelaResultado().setResultadoMultiplayer(true);
-				this.tela.getTelaResultado().getBtnSair().setVisible(true);
-			}
-		}
-		
-		
-	}
-	
-	public void verificarVidaPersonagens(){
-
-		for (Personagem personagem : this.multiplayer.getPersonagens()) {
-			Protagonista temp = (Protagonista) personagem;
-			
-			if(personagem.isCondicaoExistencia() == true){
-				
-				
-				
-				if(personagem.getQntVida() ==0){
-					personagem.setCondicaoExistencia(false);
-					
-					personagem.setBounds(0, 0);
-					
-					
-					if(personagem instanceof Protagonista){
-						temp.setMorto(true);
-					}
-					
-					if (temp.getNome().equalsIgnoreCase("Niklaus")){
-						this.telaInventario.getBarPlayer1().setVisible(false);	
-						
-						
-						
-					}
-					else{
-						this.telaInventario.getBarPlayer2().setVisible(false);
-						
-					}
-					
-					
-					
-				}
-					
-				
-				
-				else{
-					
-					
-						if (temp.getNome().equalsIgnoreCase("Niklaus")){
-							this.telaInventario.getBarPlayer1().setValue(temp.getQntVida());	
-							this.telaInventario.getLbPontuacaoPlayer1().setText(temp.getPontuacao()+"");
-							this.telaInventario.getBarPlayer1().setToolTipText(temp.getQntVida()+"/"+this.telaInventario.getBarPlayer1().getMaximum());
-							
-							
-						}
-						else{
-							this.telaInventario.getBarPlayer2().setValue(temp.getQntVida());
-							this.telaInventario.getBarPlayer2().setToolTipText(temp.getQntVida()+"/"+this.telaInventario.getBarPlayer2().getMaximum());
-							this.telaInventario.getLbPontuacaoPlayer2().setText(temp.getPontuacao()+"");
-						}
-						
-						
-				}
-				
-		
-					
-			}
-				
-			
-			
-			
-			}
-	}
-	
-	
-	
-	public Boolean getTelaAtiva() {
-		return telaAtiva;
+		this.multiplayer.getTelaFloresta().setFocusable(true);
+		this.multiplayer.getTelaFloresta().requestFocus();
 	}
 
-	public void setTelaAtiva(Boolean telaAtiva) {
-		this.telaAtiva = telaAtiva;
+	public void ativar(){
+		this.telaInventario.getBtnPausar().addActionListener(this);
+		this.telaPausa.getBtnConfiguracao().addActionListener(this);
+		this.telaPausa.getBtnVoltar().addActionListener(this);
+		this.telaPausa.getTelaConfiguracoes().getBtnVoltar().addActionListener(this);
+		
+		
 	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == this.telaInventario.getBtnPausar()){
+			
+			this.controleFase.desativar();
+			this.multiplayer.getCardInventario().show(this.multiplayer.getPanelInventario(), "2");
+			
+		}
+		
+		else if(e.getSource() == this.telaPausa.getBtnVoltar()){
+			this.controleFase.ativar();
+			this.multiplayer.getCardInventario().show(this.multiplayer.getPanelInventario(), "1");
+			
+		}
+		
+		else if(e.getSource() == this.telaPausa.getBtnConfiguracao()){
+			this.telaPausa.getTelaConfiguracoes().setVisible(true);
+		}
+		
+		else if(e.getSource() == this.telaPausa.getTelaConfiguracoes().getBtnVoltar()){
+			this.telaPausa.getTelaConfiguracoes().setVisible(false);
+		}
+		
+	}
+	
+	public void setarTransicao(Protagonista player){
+		
 
+		this.multiplayer.getTelaResultado().getLbGanhador().setText("Ganhador: "+player.getNome());
+		this.multiplayer.getTelaResultado().getLbPontucao().setText("Pontuação: "+player.getPontuacao());
+		
+		this.multiplayer.getTelaResultado().setVisible(true);
+		
+		
+		this.ganhador = player;
+	}
+	
+	public void verificarVidaPersonagem(){
+		if(this.multiplayer.getTelaFloresta().getPlayer1().isMorto()) {
+			matarControleFase();
+			setarTransicao(this.multiplayer.getTelaFloresta().getPlayer2());
+			
+		}
+		
+		else if(this.multiplayer.getTelaFloresta().getPlayer2().isMorto()) {
+			matarControleFase();
+			setarTransicao(this.multiplayer.getTelaFloresta().getPlayer1());
+		}
+		
+	}
+	
+	public void matarControleFase(){
+		this.controleFase.matarControle();
+		this.controleFase.getTelaJogo().setFocusable(false);
+		this.controleFase = null;
+		System.gc();
+		
+	}
+	
 	public void run(){
 		while(true){
-			this.verificarVidaPersonagens();
-			this.intersectItem();
-			this.multiplayer.repaint();
+			try{
+				if(this.controleFase.isAlive()){
+					
+					this.verificarVidaPersonagem();
+				}
+				
+				else{
+					break;
+				}
+			}catch(java.lang.NullPointerException e){
+				;
+			}
+			
 		}
 	}
+
+	public ControleFaseMultiplayer getControleFase() {
+		return controleFase;
+	}
+
+	public Protagonista getGanhador() {
+		return ganhador;
+	}
+	
 	
 	
 }

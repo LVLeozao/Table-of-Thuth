@@ -7,18 +7,28 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
+import model.BancoExercicios;
+import model.Exercicio;
 import model.Protagonista;
+import model.XmlExercicio;
+import view.Multiplayer;
+import view.ShowMessage;
 import view.SinglePlayer;
 import view.Tela;
 import view.TelaAbertura;
 import view.TelaAnd;
+import view.TelaCadastro;
 import view.TelaInformacoes;
 import view.TelaInventario;
 import view.TelaNot;
 import view.TelaOr;
 import view.TelaPausa;
 import view.TelaSelecao;
+import view.TelaSelectMultiplayer;
 
 public class Controle implements ActionListener, MouseListener {
 
@@ -31,6 +41,11 @@ public class Controle implements ActionListener, MouseListener {
 	private ControleSinglePlayer controleSingle;
 	private Protagonista protagonista;
 	private SinglePlayer singlePlayer;
+	private TelaCadastro telaCadastro;
+	private XmlExercicio xmlExercicio;
+	private ControleMultiplayer controleMultiplayer;
+	private Multiplayer multiplayer;
+	private TelaSelectMultiplayer telaSelecMultiplayer;
 	
 	public Controle(Tela tela){
 		this.tela = tela;
@@ -38,8 +53,17 @@ public class Controle implements ActionListener, MouseListener {
 		this.telaInformacoes = tela.getTelaInformacoes();
 		this.telaSelecao = tela.getTelaSelecao();
 		this.singlePlayer = new SinglePlayer(this.tela);
-		ativar();
+		this.multiplayer = new Multiplayer(this.tela);
+		this.xmlExercicio = new XmlExercicio();
+		BancoExercicios.carregarXml(xmlExercicio);
+		
+		this.telaSelecMultiplayer = new TelaSelectMultiplayer();
 	
+	
+		this.telaCadastro = new TelaCadastro();
+		
+		ativar();
+		
 	}
 	
 	public void ativar(){
@@ -47,11 +71,15 @@ public class Controle implements ActionListener, MouseListener {
 		this.telaAbertura.getBtnExit().addActionListener(this);
 		this.telaAbertura.getBtnSingle().addActionListener(this);
 		this.telaAbertura.getBtnMultiplayer().addActionListener(this);
+		this.telaAbertura.getBtnAdd().addActionListener(this);
+		
 		this.telaInformacoes.getBtnControle().addActionListener(this);
 		this.telaInformacoes.getBtnCreditos().addActionListener(this);
 		this.telaInformacoes.getBtnSobre().addActionListener(this);
 		this.telaInformacoes.getBtnResultados().addActionListener(this);
 		this.telaInformacoes.getBtnVoltar().addActionListener(this);
+		this.telaInformacoes.getRbSingle().addActionListener(this);
+		this.telaInformacoes.getRbMulti().addActionListener(this);
 		this.telaSelecao.getBtnConfirmar().addActionListener(this);
 		this.telaSelecao.getBtnVoltar().addActionListener(this);
 		this.telaSelecao.getLbFeminino().addMouseListener(this);
@@ -60,6 +88,19 @@ public class Controle implements ActionListener, MouseListener {
 		this.singlePlayer.getTelaPausa().getBtnSair().addActionListener(this);
 		this.singlePlayer.getTelaTransicao().getBtnSair().addActionListener(this);
 		
+		this.multiplayer.getTelaPausa().getBtnSair().addActionListener(this);
+		this.multiplayer.getTelaResultado().getBtnSair().addActionListener(this);
+		
+		
+		this.telaCadastro.getBtnCadastrar().addActionListener(this);
+		this.telaCadastro.getBtnRemover().addActionListener(this);
+		this.telaCadastro.getRbCadastrar().addActionListener(this);
+		this.telaCadastro.getRbRemover().addActionListener(this);
+		
+		
+		this.telaSelecMultiplayer.getBtnComecar().addActionListener(this);
+		this.multiplayer.getTelaResultado().getBtnSair().addActionListener(this);
+		this.multiplayer.getTelaPausa().getBtnSair().addActionListener(this);
 	
 	}
 	
@@ -95,6 +136,79 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "2");
 		}
 		
+		else if(e.getSource() == this.telaAbertura.getBtnMultiplayer() ){
+			this.telaSelecMultiplayer.setVisible(true);
+		}
+		
+		else if(e.getSource() == this.multiplayer.getTelaPausa().getBtnSair()){
+			this.multiplayer.getPanelInventario().setVisible(false);
+			this.multiplayer.getPanelJogavel().setVisible(false);
+			this.multiplayer.getTelaResultado().setVisible(false);
+			this.tela.getPanelGeral().setVisible(true);
+			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
+			this.controleMultiplayer.stop();
+			this.controleMultiplayer = null;
+			this.multiplayer = null;
+			System.gc();
+			
+			this.multiplayer = new Multiplayer(this.tela);
+			
+			ativar();
+			
+			
+			
+		}
+		
+		else if(e.getSource() == this.multiplayer.getTelaResultado().getBtnSair()){
+			
+			this.tela.getXml().salvar(this.controleMultiplayer.getGanhador());
+			
+			
+			this.tela.remove(this.multiplayer.getPanelInventario());
+			this.tela.remove(this.multiplayer.getPanelJogavel());
+			
+			this.multiplayer.getPanelInventario().setVisible(false);
+			this.multiplayer.getPanelJogavel().setVisible(false);
+			this.multiplayer.getTelaResultado().setVisible(false);
+			this.tela.getPanelGeral().setVisible(true);
+			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
+			this.controleMultiplayer.stop();
+			this.controleMultiplayer = null;
+			this.multiplayer = null;
+			System.gc();
+			
+			this.multiplayer = new Multiplayer(this.tela);
+		
+			ativar();
+			
+		}
+		else if(e.getSource() == this.telaSelecMultiplayer.getBtnComecar()){
+			
+			
+			if(!this.telaSelecMultiplayer.getTfPlayer1().getText().equals("") 
+					&&
+				!this.telaSelecMultiplayer.getTfPlayer2().getText().equals("")){
+				
+				this.tela.getPanelGeral().setVisible(false);
+				
+				this.controleMultiplayer = new ControleMultiplayer(multiplayer, this.telaSelecMultiplayer.getTfPlayer1().getText(),
+						this.telaSelecMultiplayer.getTfPlayer2().getText());
+				
+				this.controleMultiplayer.start();
+				
+				
+				this.telaSelecMultiplayer.getTfPlayer1().setText("");
+				this.telaSelecMultiplayer.getTfPlayer2().setText("");
+				this.telaSelecMultiplayer.setVisible(false);
+				
+				
+			}
+		}
+		
+		else if(e.getSource() == this.telaAbertura.getBtnAdd()){
+			this.telaCadastro.setVisible(true);
+		}
+		
 		else if(e.getSource()== this.tela.getTelaConfig().getBtnVoltar()){
 			this.tela.getTelaConfig().setVisible(false);
 		}
@@ -103,22 +217,39 @@ public class Controle implements ActionListener, MouseListener {
 			this.telaInformacoes.getLbControle().setVisible(true);
 			this.telaInformacoes.getLbSobre().setVisible(false);
 			this.telaInformacoes.getLbCredito().setVisible(false);
+			this.telaInformacoes.getBarra().setVisible(false);
+			this.telaInformacoes.getRbMulti().setVisible(false);
+			this.telaInformacoes.getRbSingle().setVisible(false);
 		}
 		
 		else if(e.getSource() == this.telaInformacoes.getBtnCreditos()){
 			this.telaInformacoes.getLbControle().setVisible(false);
 			this.telaInformacoes.getLbSobre().setVisible(false);
 			this.telaInformacoes.getLbCredito().setVisible(true);
+			this.telaInformacoes.getBarra().setVisible(false);
+			this.telaInformacoes.getRbMulti().setVisible(false);
+			this.telaInformacoes.getRbSingle().setVisible(false);
 		}
 		
 		else if(e.getSource() == this.tela.getTelaInformacoes().getBtnSobre()){
 			this.telaInformacoes.getLbControle().setVisible(false);
 			this.telaInformacoes.getLbSobre().setVisible(true);
 			this.telaInformacoes.getLbCredito().setVisible(false);
+			this.telaInformacoes.getBarra().setVisible(false);
+			this.telaInformacoes.getRbMulti().setVisible(false);
+			this.telaInformacoes.getRbSingle().setVisible(false);
 		}
 		
 		else if(e.getSource() == this.telaInformacoes.getBtnVoltar() || e.getSource() == this.telaSelecao.getBtnVoltar()){
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "1");
+			this.telaInformacoes.getLbControle().setVisible(false);
+			this.telaInformacoes.getLbSobre().setVisible(true);
+			this.telaInformacoes.getLbCredito().setVisible(false);
+			this.telaInformacoes.getBarra().setVisible(false);
+			this.telaInformacoes.getRbMulti().setVisible(false);
+			this.telaInformacoes.getRbSingle().setVisible(false);
+			
+			
 			
 			this.telaSelecao.getLbInfo().setText("");
 			this.telaSelecao.getTfNome().setText("");
@@ -126,12 +257,64 @@ public class Controle implements ActionListener, MouseListener {
 			
 		}
 		
+		else if(e.getSource() == this.telaInformacoes.getRbMulti()){
+			String temp = "= = = = RANKING MULTIPLAYER = = = =\n";
+			
+			this.tela.setResultados((ArrayList<Protagonista>) this.tela.getXml().ler());
+			
+			Collections.sort(this.tela.getResultados());
+			
+			
+			for (Protagonista x : this.tela.getResultados()) {
 
+				
+				if(x.getModoFase().equalsIgnoreCase("Multi")){
+					temp+= "Nome: " + x.getNome() + "\n";
+					temp+= "Pontuação: "+x.getPontuacao()+"\n";
+				}
+				
+			}
+			
+			this.telaInformacoes.getTextArea().setText(temp);
+			
+		}
+		
+		else if(e.getSource() == this.telaInformacoes.getRbSingle()){
+			String temp = "= = = = RANKING SINGLEPLAYER = = = =\n";
+			
+			this.tela.setResultados((ArrayList<Protagonista>) this.tela.getXml().ler());
+			
+			Collections.sort(this.tela.getResultados());
+			
+			for (Protagonista x : this.tela.getResultados()) {
+
+				
+				if(x.getModoFase().equalsIgnoreCase("single")){
+					temp+= "Nome: " + x.getNome() + "\n";
+					temp+= "Pontuação: "+x.getPontuacao()+"\n";
+					temp+= "Tempo: \n";
+					temp+= "   Fase 1: " + x.getTempos().get(0) + "\n";
+					temp+= "   Fase 2: " + x.getTempos().get(1) + "\n";
+					temp+= "   Fase 3: " + x.getTempos().get(2) + "\n\n";
+				}
+				
+			}
+			
+			this.telaInformacoes.getTextArea().setText(temp);
+			
+			
+		}
+		
 		else if(e.getSource() == this.telaInformacoes.getBtnResultados()){
 			this.telaInformacoes.getLbControle().setVisible(false);
 			this.telaInformacoes.getLbSobre().setVisible(false);
 			this.telaInformacoes.getLbCredito().setVisible(false);
-			this.telaInformacoes.getTextArea().setVisible(true);
+			this.telaInformacoes.getBarra().setVisible(true);
+			this.telaInformacoes.getRbMulti().setVisible(true);
+			this.telaInformacoes.getRbSingle().setVisible(true);
+			
+			
+			
 		}
 		
 		
@@ -146,6 +329,8 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getCardGeral().show(this.tela.getPanelGeral(), "3");
 		}
 		
+		
+		
 		else if(e.getSource() == this.telaSelecao.getBtnConfirmar()){
 			
 			if(this.telaSelecao.getSelecionado().equalsIgnoreCase("Rebekah") ||this.telaSelecao.getSelecionado().equalsIgnoreCase("Niklaus")){
@@ -156,11 +341,11 @@ public class Controle implements ActionListener, MouseListener {
 						if (this.telaSelecao.getSelecionado().equalsIgnoreCase("Rebekah")) {
 
 							this.protagonista = new Protagonista("img/Rebekah.png", 32, 32, 4, 3, 0, 2000, 32, 96, this.tela.getTelaSelecao().getTfNome().getText(), true,
-									"img/Raio.png", 4, 128, 500, "src/img/F.png", 1);
+									"img/Raio.png", 4, 128, 500, "src/img/F.png", 1, "Single");
 						}
 						else if (this.telaSelecao.getSelecionado().equalsIgnoreCase("Niklaus")) {
 							this.protagonista = new Protagonista("img/Niklaus.png", 32, 32, 4, 3, 0, 2000, 32, 96, this.tela.getTelaSelecao().getTfNome().getText(), true,
-									"img/Raio.png", 4, 128, 500, "src/img/M.png", 1);
+									"img/Raio.png", 4, 128, 500, "src/img/M.png", 1, "Single");
 						}
 
 					} 
@@ -185,6 +370,8 @@ public class Controle implements ActionListener, MouseListener {
 				}
 				
 			}
+			
+			
 		}
 		
 		else if(e.getSource() == this.singlePlayer.getTelaPausa().getBtnSair()){
@@ -195,8 +382,61 @@ public class Controle implements ActionListener, MouseListener {
 			this.tela.getXml().salvar(this.protagonista);
 			this.matarControleSingle();
 			
+		}
+		
+		else if(e.getSource() == this.telaCadastro.getRbCadastrar()){
+			this.telaCadastro.getPanelRemove().setVisible(false);
+			this.telaCadastro.getPanelAdd().setVisible(true);
 			
+		}
+		
+		else if(e.getSource() == this.telaCadastro.getRbRemover()){
+			this.telaCadastro.getPanelRemove().setVisible(true);
+			this.telaCadastro.getPanelAdd().setVisible(false);
 			
+		}
+		
+		else if(e.getSource() == this.telaCadastro.getBtnRemover()){
+			if(!this.telaCadastro.getTfIdentificador().getText().equals("")){
+				
+				BancoExercicios.removerExercicio(Integer.parseInt(this.telaCadastro.getTfIdentificador().getText()), xmlExercicio);
+			
+				
+				
+				
+				
+			}
+			BancoExercicios.carregarXml(xmlExercicio);
+			this.telaCadastro.getTextArea().setText(BancoExercicios.gerarTexto());
+		}
+		
+		else if(e.getSource() == this.telaCadastro.getBtnCadastrar()){
+			
+
+			if(!this.telaCadastro.getTfEnunciado().getText().equals("")
+					&& !this.telaCadastro.getTfResposta().getText().equals("")
+					&& !this.telaCadastro.getTfTag().getText().equals("")){
+				
+				
+				while (true){
+					int id = new Random().nextInt(1000);
+					if(BancoExercicios.buscar(id) == null){
+						BancoExercicios.addExercicio(new Exercicio(
+								this.telaCadastro.getTfEnunciado().getText(), 
+								this.telaCadastro.getTfResposta().getText(),
+								this.telaCadastro.getTfTag().getText(), 
+								id), xmlExercicio);
+						break;
+					}
+					
+				}
+				
+				BancoExercicios.carregarXml(xmlExercicio);
+				
+				this.telaCadastro.getTextArea().setText(BancoExercicios.gerarTexto());
+				
+				
+			}
 			
 		}
 		
@@ -219,6 +459,8 @@ public class Controle implements ActionListener, MouseListener {
 			this.telaSelecao.setSelecionado("Niklaus");
 			
 		}
+		
+		
 		
 		
 		

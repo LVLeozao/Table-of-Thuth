@@ -1,7 +1,11 @@
 package model;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -18,7 +22,7 @@ public class XmlUsuario {
 	public XmlUsuario() {
 		this.xStream = new XStream(new Dom4JDriver());
 		xStream.processAnnotations(Protagonista.class);
-		xStream.alias("tempoFases", String.class);
+		xStream.alias("tempoFases", Protagonista.class);
 
 		file = new File("src/arquivos/usuarios.xml");
 		protagonistas = new ArrayList<Protagonista>();
@@ -26,41 +30,45 @@ public class XmlUsuario {
 	}
 
 	public void salvar(Protagonista protagonista) {
-
-		protagonistas.add(protagonista);
-
+			
+			protagonistas.add(protagonista);
+	
+			try {
+				if (!file.exists())
+					file.createNewFile();
+				else {
+					file.delete();
+					file.createNewFile();
+				}
+				
+				OutputStream stream = new FileOutputStream(file);
+				xStream.toXML(protagonistas, stream);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	
+		}
+	
+	
+	public List<Protagonista> ler()
+	{
 		try {
 			if (!file.exists())
 				file.createNewFile();
 			else {
-				file.delete();
-				file.createNewFile();
+				
+				this.protagonistas = (ArrayList<Protagonista>) xStream.fromXML(file);
+				
+				return 	this.protagonistas;
 			}
-
-			OutputStream stream = new FileOutputStream(file);
-			xStream.toXML(protagonista, stream);
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Protagonista> ler() {
-		try {
-			if (!file.exists())
-				file.createNewFile();
-			else {
-				return (List<Protagonista>) xStream.fromXML(file);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-
+		return new ArrayList<Protagonista>();
+		
 	}
 
 	public List<Protagonista> getQuestaos() {
