@@ -28,7 +28,7 @@ public class Bau {
 	}
 
 
-	public void mostrarInformação(){
+	public void mostrarInformacao(){
 		ShowMessage.showText(this.texto);
 	}
 

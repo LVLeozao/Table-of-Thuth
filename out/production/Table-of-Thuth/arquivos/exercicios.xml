@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<list>
+  <model.Exercicio>
+    <text>Qual a saída para V v V = ?</text>
+    <resposta>True</resposta>
+    <tag>Or</tag>
+    <id>648</id>
+  </model.Exercicio>
+  <model.Exercicio>
+    <text>Qual a saída para F v V = ?</text>
+    <resposta>True</resposta>
+    <tag>Or</tag>
+    <id>544</id>
+  </model.Exercicio>
+  <model.Exercicio>
+    <text>Qual a saída para F v F = ?</text>
+    <resposta>False</resposta>
+    <tag>Or</tag>
+    <id>127</id>
+  </model.Exercicio>
+  <model.Exercicio>
+    <text>Qual a saída para ~F v F = ?</text>
+    <resposta>True</resposta>
+    <tag>Not</tag>
+    <id>145</id>
+  </model.Exercicio>
+  <model.Exercicio>
+    <text>Qual a saída para ~F ^ V = ?</text>
+    <resposta>True</resposta>
+    <tag>Not</tag>
+    <id>259</id>
+  </model.Exercicio>
+  <model.Exercicio>
+    <text>Qual a saída para ~F ^ ~V = ?</text>
+    <resposta>False</resposta>
+    <tag>Not</tag>
+    <id>606</id>
+  </model.Exercicio>
+  <model.Exercicio>
+    <text>Qual a saída para F ^V = ?</text>
+    <resposta>False</resposta>
+    <tag>And</tag>
+    <id>115</id>
+  </model.Exercicio>
+  <model.Exercicio>
+    <text>Qual a saída para F ^ F = ?</text>
+    <resposta>False</resposta>
+    <tag>And</tag>
+    <id>408</id>
+  </model.Exercicio>
+  <model.Exercicio>
+    <text>Qual a saída para V ^ V = ?</text>
+    <resposta>True</resposta>
+    <tag>And</tag>
+    <id>657</id>
+  </model.Exercicio>
+</list>

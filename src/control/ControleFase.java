@@ -185,7 +185,7 @@ public class ControleFase extends Thread{
 					desativarThread();
 					this.protagonista.setAction(-1);
 					bau.getSomBau().play();
-					bau.mostrarInformação();
+					bau.mostrarInformacao();
 					bau.setWasActivated(true);
 					this.protagonista.setQntBausAbertos(this.protagonista.getQntBausAbertos()+1);
 					this.telaInventario.setQntBaus(this.telaInventario.getQntBaus()+1);
@@ -199,7 +199,7 @@ public class ControleFase extends Thread{
 			else if(this.protagonista.getBounds().intersects(bau.getRectangle().getBounds()) && bau.getWasActivated()== true){
 				desativarThread();
 				this.protagonista.setAction(-1);
-				ShowMessage.showText("Báu já foi ativado!");
+				ShowMessage.showText("Bï¿½u jï¿½ foi ativado!");
 				ativarThread();
 			}	
 		}
